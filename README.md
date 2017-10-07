@@ -17,6 +17,7 @@ MSE MobOp Mini Project
 - Operation Status
 - example list all Locations in Canton Graubünden https://skimap.org/Regions/view/383.xml
 - example show informations abaout Skiresort Arosa https://skimap.org/SkiAreas/view/1017.xml
+- Number of Skiresorts:10 Ostschweiz, 13 Berneroberland,  16 Innerschweiz, 27 Graubünden, 7 Tessin, 48 Wallis -> Total: 121
 
 ### 3. [snowcountry.net](https://feeds.snocountry.net/)
 - List of Skiresorts
@@ -29,3 +30,4 @@ MSE MobOp Mini Project
 - need a api key -> Testing with key SnoCountry.example
 - example list all Locations in Switzerland 
 - example show information about Skiresort Arosa http://feeds.snocountry.net/conditions.php?apiKey=SnoCountry.example&ids=13003
+- only 51 Skiresorts in Switzerland
