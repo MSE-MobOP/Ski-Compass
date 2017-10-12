@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "195642728826",
+    "firebase_url": "https://ski-compass.firebaseio.com",
+    "project_id": "ski-compass",
+    "storage_bucket": "ski-compass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195642728826:android:4dd70198f8b72b4e",
+        "android_client_info": {
+          "package_name": "mse_mobop.ski_compass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195642728826-dp064g8hpho59iljglbqo77o042undnm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mse_mobop.ski_compass",
+            "certificate_hash": "04d346e84a2b75e82c7507d838623f343bb899c9"
+          }
+        },
+        {
+          "client_id": "195642728826-kjolnprctfbireobvte4agmbkargmp4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvX7eOdl9zYBvw4NfOy9fhfBDrnYHhiYM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195642728826-kjolnprctfbireobvte4agmbkargmp4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
