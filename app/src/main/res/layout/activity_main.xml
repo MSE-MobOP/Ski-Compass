@@ -7,6 +7,7 @@
     tools:context="mse_mobop.ski_compass.MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -14,5 +15,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set a fantasy location to db"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="320dp" />
 
 </android.support.constraint.ConstraintLayout>
