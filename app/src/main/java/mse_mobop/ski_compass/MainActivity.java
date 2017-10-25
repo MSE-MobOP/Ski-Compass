@@ -1,5 +1,6 @@
 package mse_mobop.ski_compass;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,54 +23,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // test
 
-        final TextView tv = (TextView) findViewById(R.id.textView);
-
         final Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-               tv.setText("Hi there");
+            public void onClick(View v) {
+                // tv.setText("Hi there");
 
-               // Prepare
-               DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("GeoFire");
-               GeoFire geoFire = new GeoFire(dbRef);
+                // Prepare
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("GeoFire");
+                GeoFire geoFire = new GeoFire(dbRef);
 
-               // Write a location to db
-               geoFire.setLocation("firebase-hq", new GeoLocation(5, 5));
+                // Write a location to db
+                geoFire.setLocation("firebase-hq", new GeoLocation(5, 5));
 
-               // Search around a location
-               GeoQuery query = geoFire.queryAtLocation(new GeoLocation(5, 5), 10);
-               query.addGeoQueryEventListener(new GeoQueryEventListener() {
+                // Search around a location
+                GeoQuery query = geoFire.queryAtLocation(new GeoLocation(5, 5), 10);
+                query.addGeoQueryEventListener(new GeoQueryEventListener() {
 
-                   // This method is called every time a location gets into the radius...
-                   // should save the list once and then deregister...
-                   @Override
-                   public void onKeyEntered(String key, GeoLocation location) {
-                       Toast.makeText(MainActivity.this, "Something is coming... Key: " + key, Toast.LENGTH_LONG).show();
-                   }
+                    // This method is called every time a location gets into the radius...
+                    // should save the list once and then deregister...
+                    @Override
+                    public void onKeyEntered(String key, GeoLocation location) {
+                        Toast.makeText(MainActivity.this, "Something is coming... Key: " + key, Toast.LENGTH_LONG).show();
+                    }
 
-                   @Override
-                   public void onKeyExited(String key) {
+                    @Override
+                    public void onKeyExited(String key) {
 
-                   }
+                    }
 
-                   @Override
-                   public void onKeyMoved(String key, GeoLocation location) {
+                    @Override
+                    public void onKeyMoved(String key, GeoLocation location) {
 
-                   }
+                    }
 
-                   @Override
-                   public void onGeoQueryReady() {
+                    @Override
+                    public void onGeoQueryReady() {
 
-                   }
+                    }
 
-                   @Override
-                   public void onGeoQueryError(DatabaseError error) {
+                    @Override
+                    public void onGeoQueryError(DatabaseError error) {
 
-                   }
-               });
+                    }
+                });
 
 
-           }
+            }
         });
     }
+
+    public void testList(View v) {
+        Intent intent = new Intent(this, ResultListActivity.class);
+        startActivity(intent);
+    }
+
 }
