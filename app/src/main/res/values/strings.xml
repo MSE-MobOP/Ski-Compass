@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ski-Compass</string>
+    <string name="nodata">Keine Daten</string>
 </resources>
