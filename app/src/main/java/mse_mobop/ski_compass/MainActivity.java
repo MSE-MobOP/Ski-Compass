@@ -86,4 +86,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Longitude", location.getLongitude());
         startActivity(intent);
     }
+    public void testDetail(View v) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
+    }
+
 }
