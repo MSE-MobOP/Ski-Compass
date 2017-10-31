@@ -11,6 +11,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         checkLocationPermission();
         if (hasLocationPermission) {
-            getLocation();
+            location = getLocation();
         }
     }
 
@@ -49,14 +52,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getLocation() {
+    public Location getLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        String provider = locationManager.getBestProvider(new Criteria(), false);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+        List<String> providers = locationManager.getProviders(true);
+        //String provider = locationManager.getBestProvider(new Criteria(), true);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            location = locationManager.getLastKnownLocation(provider);
+            for (String provider: providers) {
+                Location location = locationManager.getLastKnownLocation(provider);
+                if (location != null){
+                    return location;
+                }
+            }
         }
+        return null;
     }
 
 
@@ -81,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testList(View v) {
+        if (location == null) {
+            Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent intent = new Intent(this, ResultListActivity.class);
         intent.putExtra("Latitude", location.getLatitude());
         intent.putExtra("Longitude", location.getLongitude());

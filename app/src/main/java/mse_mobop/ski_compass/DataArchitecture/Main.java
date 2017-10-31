@@ -3,7 +3,7 @@
  * C.Schmid, M.Messmer, A.Papaj
  * @author C.Schmid
  */
-package DataArchitecture;
+package mse_mobop.ski_compass.DataArchitecture;
 
 public class Main {
     

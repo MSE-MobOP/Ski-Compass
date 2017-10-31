@@ -1,9 +1,4 @@
-/*
- * Ski-Compass App 2017 MobOp MSE
- * C.Schmid, M.Messmer, A.Papaj
- * @author C.Schmid
- */
-package DataArchitecture;
+package mse_mobop.ski_compass.DataArchitecture;
 
 /**
  * Reflects the root of resort data from database
@@ -13,9 +8,9 @@ public class SkiResort {
     private int id;
     private String name;
     private WeatherData weatherData;
-    private String official_website;
-    private String operating_status;
-    private String night_skiing;
+    private String officialWebsite;
+    private String operatingStatus;
+    private String nightSkiing;
 
     public int getId() {
         return id;
@@ -30,14 +25,19 @@ public class SkiResort {
     }
 
     public String getOfficialWebsite() {
-        return official_website;
+        return officialWebsite;
     }
 
     public String getOperatingStatus() {
-        return operating_status;
+        return operatingStatus;
     }
 
     public String getNightSkiing() {
-        return night_skiing;
+        return nightSkiing;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

@@ -1,4 +1,4 @@
-package dataApplication;
+package mse_mobop.ski_compass;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,12 +52,12 @@ public class GeoFireLocationTest {
 				} else {
 					geoQuery.removeAllListeners();
 					System.out.println("Foudn enought Locations");
-					
+
 				}
 			}
 
 			public void onGeoQueryReady() {
-				//System.out.println("Ready with Radius " + radius);
+				// System.out.println("Ready with Radius " + radius);
 				geoQuery.setRadius(radius++);
 			}
 

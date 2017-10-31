@@ -13,13 +13,15 @@ import com.firebase.geofire.GeoLocation;
 import java.util.ArrayList;
 import java.util.List;
 
+import mse_mobop.ski_compass.DataArchitecture.SkiResort;
+
 /**
  * Created by artanpapaj on 25.10.17.
  */
 
 public class ResultListActivity extends ListActivity {
 
-    private List<String> skiResorts = new ArrayList<String>();
+    private List<SkiResort> skiResorts = new ArrayList<SkiResort>();
     private GeoLocation location;
 
     @Override
@@ -34,7 +36,7 @@ public class ResultListActivity extends ListActivity {
 
       //  results.add("Location: " + location.toString());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, skiResorts);
+        ArrayAdapter<SkiResort> adapter = new ArrayAdapter<SkiResort>(this, android.R.layout.simple_list_item_1, skiResorts);
         SkiResortManager.getInstance().loadNearestResorts(location, adapter);
         setListAdapter(adapter);
     }

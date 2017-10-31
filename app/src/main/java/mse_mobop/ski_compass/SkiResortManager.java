@@ -8,6 +8,7 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,6 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mse_mobop.ski_compass.DataArchitecture.SkiResort;
 
 import static android.content.ContentValues.TAG;
 
@@ -41,24 +44,26 @@ public class SkiResortManager {
         return instance;
     }
 
-    public void loadNearestResorts(GeoLocation location, final ArrayAdapter<String> adapter) {
+    public void loadNearestResorts(GeoLocation location, final ArrayAdapter<SkiResort> adapter) {
         numberOfResorts = 0;
         final GeoQuery query = geoFire.queryAtLocation(location, 1);
         query.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 numberOfResorts++;
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("skiresorts/" + key);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("skiresorts").child(key);
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        adapter.add(dataSnapshot.child("name").getValue(String.class));
+                        Log.d(TAG, "onDataChange ValueEvent: " + dataSnapshot);
+                        SkiResort resort = dataSnapshot.getValue(SkiResort.class);
+                        adapter.add(resort);
                         adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Log.e(TAG, "onCancelled: " + databaseError );
                     }
                 });
             }
