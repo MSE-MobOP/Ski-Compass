@@ -1,12 +1,14 @@
 package mse_mobop.ski_compass;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.firebase.geofire.GeoLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,28 +18,32 @@ import java.util.List;
  */
 
 public class ResultListActivity extends ListActivity {
-    List<String> results = new ArrayList<String>();
 
-    protected void loadTestContent() {
-        for (int i = 0; i < 15; i++) {
-            results.add("Skigebiet " + String.valueOf(i + 1));
-        }
-    }
+    private List<String> skiResorts = new ArrayList<String>();
+    private GeoLocation location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_layout);
 
-        loadTestContent();
+        Intent intent = getIntent();
+        double latitude = intent.getDoubleExtra("Latitude", 0.0);
+        double longitude = intent.getDoubleExtra("Longitude", 0.0);
+        location = new GeoLocation(latitude, longitude);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results);
+      //  results.add("Location: " + location.toString());
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, skiResorts);
+        SkiResortManager.getInstance().loadNearestResorts(location, adapter);
         setListAdapter(adapter);
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Toast.makeText(getApplicationContext(), "Position :" + position, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
     }
 
 }
