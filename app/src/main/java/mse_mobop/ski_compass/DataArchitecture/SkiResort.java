@@ -7,21 +7,21 @@ public class SkiResort {
 
     private int id;
     private String name;
-    private WeatherData weatherData;
-    private String officialWebsite;
     private String operatingStatus;
     private String nightSkiing;
+    private String officialWebsite;
+    private WeatherData weatherData;
+
+    public WeatherData getWeatherData() {
+        return weatherData;
+    }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public WeatherData getWeatherData() {
-        return weatherData;
+    public String getNightSkiing() {
+        return nightSkiing;
     }
 
     public String getOfficialWebsite() {
@@ -32,12 +32,12 @@ public class SkiResort {
         return operatingStatus;
     }
 
-    public String getNightSkiing() {
-        return nightSkiing;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return getName();
+        return name;
     }
 }

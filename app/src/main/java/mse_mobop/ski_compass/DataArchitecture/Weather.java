@@ -10,6 +10,22 @@ public class Weather {
     public String icon;
     public String description;
     public String main;
-    public String id;
+    public int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getMain() {
+        return main;
+    }
     
 }
