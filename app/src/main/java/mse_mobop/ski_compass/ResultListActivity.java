@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mse_mobop.ski_compass.DataArchitecture.SkiResort;
+import mse_mobop.ski_compass.DataArchitecture.SkiResortArrayAdapter;
 
 /**
  * Created by artanpapaj on 25.10.17.
@@ -21,24 +22,25 @@ import mse_mobop.ski_compass.DataArchitecture.SkiResort;
 
 public class ResultListActivity extends ListActivity {
 
-    private List<SkiResort> skiResorts = new ArrayList<SkiResort>();
+    private List<SkiResort> skiResortList;
     private GeoLocation location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_layout);
+        if (skiResortList == null){
+            skiResortList = new ArrayList<>();
+        }
+        //setContentView(R.layout.list_layout);
 
         Intent intent = getIntent();
         double latitude = intent.getDoubleExtra("Latitude", 0.0);
         double longitude = intent.getDoubleExtra("Longitude", 0.0);
         location = new GeoLocation(latitude, longitude);
 
-      //  results.add("Location: " + location.toString());
-
-        ArrayAdapter<SkiResort> adapter = new ArrayAdapter<SkiResort>(this, android.R.layout.simple_list_item_1, skiResorts);
-        SkiResortManager.getInstance().loadNearestResorts(location, adapter);
-        setListAdapter(adapter);
+//        ArrayAdapter<SkiResort> adapter = new ArrayAdapter<SkiResort>(this, android.R.layout.simple_list_item_1, skiResorts);
+//        SkiResortManager.getInstance().loadNearestResorts(location, adapter);
+//        setListAdapter(adapter);
     }
 
     @Override
@@ -46,6 +48,15 @@ public class ResultListActivity extends ListActivity {
         Toast.makeText(getApplicationContext(), "Position :" + position, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // construct and register the adapter
+        SkiResortArrayAdapter adapter = new SkiResortArrayAdapter(this, skiResortList);
+        setListAdapter(adapter);
+        SkiResortManager.getInstance().loadNearestResorts(location, adapter);
     }
 
 }

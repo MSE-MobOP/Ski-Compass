@@ -7,9 +7,9 @@ public class SkiResort {
 
 	private int id;
 	private String name;
-	private String operatingStatus;
-	private String nightSkiing;
-	private String officialWebsite;
+	private OperatingStatus operating_status;
+	private String night_skiing;
+	private String official_website;
 	private WeatherData weatherData;
 
 	public int getId() {
@@ -20,16 +20,16 @@ public class SkiResort {
 		return name;
 	}
 
-	public String getOperatingStatus() {
-		return operatingStatus;
+	public OperatingStatus getOperating_status() {
+		return operating_status;
 	}
 
-	public String getNightSkiing() {
-		return nightSkiing;
+	public String getNight_skiing() {
+		return night_skiing;
 	}
 
-	public String getOfficialWebsite() {
-		return officialWebsite;
+	public String getOfficial_website() {
+		return official_website;
 	}
 
 	public WeatherData getWeatherData() {
@@ -44,4 +44,10 @@ public class SkiResort {
 	public String toString() {
 		return name;
 	}
+}
+
+enum OperatingStatus{
+	Operating,
+	Unknown,
+	Closed,
 }
