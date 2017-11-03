@@ -7,25 +7,20 @@ package mse_mobop.ski_compass.DataArchitecture;
 
 public class Main {
     
-    private String temp;
-    private String temp_min;
-//    private String humidity;
-//    private String pressure;
-    private String temp_max;
+    private double temp;
+    private double tempMin;
+    private double tempMax;
     
     public double getTemp() {
-        return calcTemp(temp);
+        return temp;//calcTemp(temp);
     }
-    
-    public double getTempMax() {
-        return calcTemp(temp_max);
-    }
-    
+
     public double getTempMin() {
-        return calcTemp(temp_min);
+        return tempMin;
     }
-    
-    private double calcTemp(String text) {
-        return Double.parseDouble(text) - 273;
+
+    public double getTempMax() {
+        return tempMax;
     }
+
 }

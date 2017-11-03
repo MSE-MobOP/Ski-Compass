@@ -58,9 +58,6 @@ public class SkiResortManager {
                         SkiResort resort = dataSnapshot.getValue(SkiResort.class);
                         adapter.add(resort);
                         adapter.notifyDataSetChanged();
-
-                        System.out.println("TempMax: " + resort.getWeatherData().getMain().getTempMax());
-                        System.out.println("Weather: " + resort.getWeatherData().getWeather().getMain());
                     }
 
                     @Override

@@ -9,15 +9,15 @@ import java.util.List;
 
 public class WeatherData {
 
-	private List<Weather> weather;
 	private Main main;
-
-	public Weather getWeather() {
-		return weather.get(0);
-	}
+	private List<Weather> weather;
 
 	public Main getMain() {
 		return main;
+	}
+
+	public List<Weather> getWeather() {
+		return weather;
 	}
 
 }

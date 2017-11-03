@@ -5,17 +5,19 @@
  */
 package mse_mobop.ski_compass.DataArchitecture;
 
+import java.util.List;
+
 public class WeatherData {
 
-    private Main main;
-    private Weather weather;
+	private Main main;
+	private List<Weather> weather;
 
-    public Main getMain() {
-        return main;
-    }
+	public Main getMain() {
+		return main;
+	}
 
-    public Weather getWeather() {
-        return weather;
-    }
+	public List<Weather> getWeather() {
+		return weather;
+	}
 
 }

@@ -1,7 +1,18 @@
 package mse_mobop.ski_compass;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -10,17 +21,11 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import mse_mobop.ski_compass.DataArchitecture.*;
+import mse_mobop.ski_compass.DataArchitecture.SkiResort;
+import mse_mobop.ski_compass.DataArchitecture.WeatherData;
 
 public class DatabaseFill {
 
@@ -42,7 +47,7 @@ public class DatabaseFill {
 			989, 5670, 5412, 4387, 4835, 3727, 988, 996, 994, 997, 3112, 5676, 3783, 3781, 3718, 2893, 2890, 993, 3711,
 			3708, 990, 4390, 4600, 5427, 5428, 992, 999, 995, 4046, 987 };
 
-	public static void main(String[] args) throws UnirestException, FileNotFoundException {
+	public static void main(String[] args) throws Exception {
 		// Initialize Firebase Database Connection
 		FileInputStream serviceAccount = new FileInputStream("ski-compass-firebase-adminsdk-9ojmj-a8522c42f9.json");
 		FirebaseOptions options = new FirebaseOptions.Builder().setServiceAccount(serviceAccount)
@@ -56,78 +61,67 @@ public class DatabaseFill {
 
 		Gson gson = new Gson();
 
+		// Start Workaround with outdated SSL Certificate from skimap.org
+		try {
+			SSLContext ctx = SSLContext.getInstance("TLS");
+			ctx.init(new KeyManager[0], new TrustManager[] { new X509TrustManager() {
+
+				@Override
+				public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+				}
+
+				@Override
+				public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+				}
+
+				@Override
+				public X509Certificate[] getAcceptedIssuers() {
+					return null;
+				}
+			} }, new SecureRandom());
+
+			SSLContext.setDefault(ctx);
+			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(ctx,
+					SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+			Unirest.setHttpClient(httpclient);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		// End Workaround
+
 		for (int id : resortsIDs) {
-			// int id = 1012;
 
 			// Get Data form API: Resorts
 			System.out.println("Get Resort: " + id);
-			HttpResponse<JsonNode> jsonResponse = Unirest.get("https://skimap.org/SkiAreas/view/" + id + ".json")
-					.asJson();
+			JsonNode jsonResponse = Unirest.get("https://skimap.org/SkiAreas/view/" + id + ".json").asJson().getBody();
 
 			// Read out Location from API Response
-			double latitude = jsonResponse.getBody().getObject().getDouble("latitude");
-			double longitude = jsonResponse.getBody().getObject().getDouble("longitude");
+			double latitude = jsonResponse.getObject().getDouble("latitude");
+			double longitude = jsonResponse.getObject().getDouble("longitude");
 
 			// Set Location on GeoFire
 			geoFire.setLocation(Integer.toString(id), new GeoLocation(latitude, longitude));
-
-			// Save skiresortdata
-			String skiResortData = jsonResponse.getBody().toString();
+			
+			SkiResort skiResort = gson.fromJson(jsonResponse.toString(), SkiResort.class);
 
 			// get weather data
 			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
-					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6").asJson();
-			String weather = jsonResponse.getBody().toString();
+					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6").asJson().getBody();
+			String weatherJson = jsonResponse.toString();
+			skiResort.setWeatherData(gson.fromJson(weatherJson, WeatherData.class));
 
-			// combine skiresortdata and weather
-			skiResortData = addWeather(skiResortData, weather);
-
-			SkiResort skiResort = gson.fromJson(skiResortData, SkiResort.class);
-			skiResorts.child(Integer.toString(id)).setValue(skiResort);
 			// Put resort data to firebase database
-			// Unirest.put("https://ski-compass.firebaseio.com/skiresorts/" + id +
-			// ".json").body(skiResortData).asJson();
-
-			// Unirest.put("https://ski-compass.firebaseio.com/skiresorts/" + id +
-			// ".json").body(jsonResponse.getBody())
-			// .asJson();
+			skiResorts.child(Integer.toString(id)).setValue(skiResort);
 
 			// save one json to file for testing
 			if (id == 1012) {
 				System.out.println("ID: " + skiResort.getId());
 				System.out.println("NAME: " + skiResort.getName());
-				System.out.println("WEATHER: " + skiResort.getWeatherData().getWeather().description);
+				//System.out.println("WEATHER: " + skiResort.getWeatherData().getWeather().description);
 				System.out.println("TEMP: " + skiResort.getWeatherData().getMain().getTemp());
 			}
 		}
 
 	}
-
-	/**
-	 * Merges two JSON Object-String to one by simply remove leading/trailing
-	 * braket...
-	 *
-	 * @param json1
-	 *            JSONObject1 String
-	 * @param json2
-	 *            JSONObject2 String
-	 * @return
-	 */
-	public static String mergeJSON(String json1, String json2) {
-		return json1.trim().substring(0, json1.length() - 1) + ", " + json2.trim().substring(1);
-	}
-
-	/**
-	 * Adds string "weather" as nested object to "json"
-	 *
-	 * @param json1
-	 *            Json-String to add weather-object to
-	 * @param weather
-	 *            Json-String containing the weather
-	 * @return
-	 */
-	public static String addWeather(String json1, String weather) {
-		return json1.trim().substring(0, json1.length() - 1) + ", \"weatherData\" : " + weather.trim() + "}";
-	}
-
 }
