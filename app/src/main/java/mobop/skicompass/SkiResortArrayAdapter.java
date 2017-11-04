@@ -1,4 +1,4 @@
-package mobop.skicompass.dataarchitecture;
+package mobop.skicompass;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import mobop.skicompass.R;
+import mobop.skicompass.dataarchitecture.SkiResort;
 
 /**
  * Created by Martin on 03.11.2017.
@@ -42,9 +42,9 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
                 name.setText(resort.getName());
             }
 
-            // Set image to Operating Status
+            // Set image to OPERATING Status
             if (status != null) {
-                switch (resort.getOperating_status()) {
+                switch (resort.getOperatingStatus()) {
                     case Operating:
                         status.setImageResource(R.drawable.open);
                         break;

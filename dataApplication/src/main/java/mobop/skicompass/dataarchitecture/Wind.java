@@ -5,9 +5,14 @@
  */
 package mobop.skicompass.dataarchitecture;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Wind {
     
+	@SerializedName("deg")
     private String deg;
+	
+	@SerializedName("speed")
     private String speed;
     
     public double getDeg() {

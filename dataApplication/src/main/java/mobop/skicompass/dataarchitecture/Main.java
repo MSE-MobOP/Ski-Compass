@@ -5,14 +5,21 @@
  */
 package mobop.skicompass.dataarchitecture;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Main {
     
+	@SerializedName("temp")
     private double temp;
+	
+	@SerializedName("tempMin")
     private double tempMin;
+	
+	@SerializedName("tempMax")
     private double tempMax;
     
     public double getTemp() {
-        return temp;//calcTemp(temp);
+        return temp;
     }
 
     public double getTempMin() {
