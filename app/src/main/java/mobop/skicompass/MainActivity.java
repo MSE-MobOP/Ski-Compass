@@ -4,34 +4,28 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
-    private boolean hasLocationPermission = false;
     private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // test
-
-        checkLocationPermission();
-        if (hasLocationPermission) {
-            location = getLocation();
-        }
+        setContentView(R.layout.activity_main);
+        startLocationListener();
     }
 
-
-    public void checkLocationPermission() {
+    public void startLocationListener() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -44,46 +38,27 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
-            hasLocationPermission = false;
         } else {
-            hasLocationPermission = true;
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);   // Emulator does not work with Network_Provider
         }
     }
-
-    public Location getLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        List<String> providers = locationManager.getProviders(true);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            for (String provider : providers) {
-                Location lastLocation = locationManager.getLastKnownLocation(provider);
-                if (lastLocation != null) {
-                    return lastLocation;
-                }
-            }
-        }
-        return null;
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
-            // If request is cancelled, the result arrays are empty.
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (ContextCompat.checkSelfPermission(this,
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION &&
+                grantResults.length > 0 &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
-                    hasLocationPermission = true;
-                }
-            } else {
-                hasLocationPermission = false;
-            }
-            return;
+            startLocationListener();
         }
     }
 
-    public void testList() {
+
+    public void testList(View v) {
         if (location == null) {
             Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
             return;
@@ -94,9 +69,29 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void testDetail() {
+    public void testDetail(View v) {
         Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        // Called when new Location is found
+        this.location = location;
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+        // Do nothing
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+        // Do nothing
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+        // Do nothing
+    }
 }
