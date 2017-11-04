@@ -31,7 +31,7 @@ public class ResultListActivity extends ListActivity {
         if (skiResortList == null){
             skiResortList = new ArrayList<>();
         }
-        //setContentView(R.layout.list_layout);
+        setContentView(R.layout.list_layout);
 
         Intent intent = getIntent();
         double latitude = intent.getDoubleExtra("Latitude", 0.0);

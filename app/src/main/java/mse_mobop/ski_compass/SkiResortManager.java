@@ -45,7 +45,7 @@ public class SkiResortManager {
 
     public void loadNearestResorts(GeoLocation location, final ArrayAdapter<SkiResort> adapter) {
         numberOfResorts = 0;
-        final GeoQuery query = geoFire.queryAtLocation(location, 1);
+        final GeoQuery query = geoFire.queryAtLocation(location, 10);
         query.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {

@@ -16,10 +16,9 @@
 
     <ImageView
         android:id="@+id/Status"
-        android:layout_width="16sp"
-        android:layout_height="16sp"
-        android:layout_gravity="right"
-        android:layout_margin="10pt"
-        />
+        android:layout_width="20pt"
+        android:layout_height="20pt"
+        android:layout_margin="5pt"
+        android:layout_weight="1"/>
 
 </LinearLayout>

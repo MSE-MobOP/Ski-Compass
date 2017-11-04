@@ -1,6 +1,8 @@
 package mse_mobop.ski_compass.DataArchitecture;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,15 +46,13 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
             // Set image to Operating Status
             if (status != null){
                 switch (resort.getOperating_status()){
-                    case OPERATING:
+                    case Operating:
                         status.setImageResource(R.drawable.open);
-                        status.setBackgroundColor(0x00FF00);
                         break;
-                    case CLOSED:
+                    case Closed:
                         status.setImageResource(R.drawable.closed);
-                        status.setBackgroundColor(0xFF0000);
                         break;
-                    case UNKNOWN:
+                    case Unknown:
                         status.setImageResource(R.drawable.unknown);
                 }
             }
