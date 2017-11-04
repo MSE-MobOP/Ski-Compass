@@ -47,7 +47,7 @@ public class SkiResortManager {
             public void onKeyEntered(String key, GeoLocation location) {
                 numberOfResorts++;
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("skiresorts").child(key);
-                ref.addValueEventListener(new ValueEventListener() {
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Log.d(TAG, "onDataChange ValueEvent: " + dataSnapshot);

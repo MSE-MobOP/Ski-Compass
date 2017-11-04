@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private boolean hasLocationPermission = false;
-    private LocationManager locationManager;
     private Location location;
 
     @Override
@@ -53,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Location getLocation() {
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            for (String provider: providers) {
-                Location location = locationManager.getLastKnownLocation(provider);
-                if (location != null){
-                    return location;
+            for (String provider : providers) {
+                Location lastLocation = locationManager.getLastKnownLocation(provider);
+                if (lastLocation != null) {
+                    return lastLocation;
                 }
             }
         }
@@ -69,28 +67,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        hasLocationPermission = true;
-                    }
-                } else {
-                    hasLocationPermission = false;
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    hasLocationPermission = true;
                 }
-                return;
+            } else {
+                hasLocationPermission = false;
             }
-            default:
-                // do nothing
+            return;
         }
     }
 
-    public void testList(View v) {
+    public void testList() {
         if (location == null) {
             Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
             return;
@@ -100,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Longitude", location.getLongitude());
         startActivity(intent);
     }
-    public void testDetail(View v) {
+
+    public void testDetail() {
         Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
     }

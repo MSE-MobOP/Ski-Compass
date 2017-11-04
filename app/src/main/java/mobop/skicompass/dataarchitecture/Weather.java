@@ -5,12 +5,21 @@
  */
 package mobop.skicompass.dataarchitecture;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Weather {
     
-    private String icon;
-    private String description;
-    private String main;
-    private int id;
+	@SerializedName("icon")
+    public String icon;
+	
+	@SerializedName("description")
+    public String description;
+	
+	@SerializedName("main")
+    public String main;
+	
+	@SerializedName("id")
+    public int id;
 
     public int getId() {
         return id;

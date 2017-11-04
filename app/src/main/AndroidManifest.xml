@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="mse.mobop.skiCompass.MainActivity">
+        <activity android:name="mobop.skicompass.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="mse.mobop.skiCompass.ResultListActivity" />
-        <activity android:name="mse.mobop.skiCompass.DetailActivity" />
+        <activity android:name="mobop.skicompass.ResultListActivity" />
+        <activity android:name="mobop.skicompass.DetailActivity" />
     </application>
 
 </manifest>

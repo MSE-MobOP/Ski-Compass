@@ -7,9 +7,14 @@ package mobop.skicompass.dataarchitecture;
 
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class WeatherData {
 
+	@SerializedName("main")
 	private Main main;
+	
+	@SerializedName("weather")
 	private List<Weather> weather;
 
 	public Main getMain() {

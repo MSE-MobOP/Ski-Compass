@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobop.skicompass.dataarchitecture.SkiResort;
-import mobop.skicompass.dataarchitecture.SkiResortArrayAdapter;
 
 /**
  * Created by artanpapaj on 25.10.17.

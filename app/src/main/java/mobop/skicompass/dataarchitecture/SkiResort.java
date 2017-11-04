@@ -1,15 +1,28 @@
 package mobop.skicompass.dataarchitecture;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Reflects the root of resort data from database
  */
 public class SkiResort {
 
+	@SerializedName("id")
 	private int id;
+	
+	@SerializedName("name")
 	private String name;
-	private OperatingStatus operating_status;
-	private String night_skiing;
-	private String official_website;
+	
+	@SerializedName("operating_status")
+	private OperatingStatus operatingStatus;
+	
+	@SerializedName("night_skiing")
+	private String nightSkiing;
+	
+	@SerializedName("official_website")
+	private String officialWebsite;
+	
+	@SerializedName("weatherData")
 	private WeatherData weatherData;
 
 	public int getId() {
@@ -20,16 +33,16 @@ public class SkiResort {
 		return name;
 	}
 
-	public OperatingStatus getOperating_status() {
-		return operating_status;
+	public OperatingStatus getOperatingStatus() {
+		return operatingStatus;
 	}
 
-	public String getNight_skiing() {
-		return night_skiing;
+	public String getNightSkiing() {
+		return nightSkiing;
 	}
 
-	public String getOfficial_website() {
-		return official_website;
+	public String getOfficialWebsite() {
+		return officialWebsite;
 	}
 
 	public WeatherData getWeatherData() {
@@ -44,10 +57,4 @@ public class SkiResort {
 	public String toString() {
 		return name;
 	}
-}
-
-enum OperatingStatus{
-	Operating,
-	Unknown,
-	Closed,
 }
