@@ -1,17 +1,16 @@
-package mse_mobop.ski_compass.DataArchitecture;
+package mobop.skicompass.dataarchitecture;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
 
-import mse_mobop.ski_compass.R;
+import mobop.skicompass.R;
 
 /**
  * Created by Martin on 03.11.2017.
@@ -30,22 +29,22 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
-        if (convertView == null){
-            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView= vi.inflate(R.layout.list_entry, parent, false);
+        if (convertView == null) {
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = vi.inflate(R.layout.list_entry, parent, false);
         }
         SkiResort resort = skiResortList.get(position);
-        if (resort != null){
+        if (resort != null) {
             TextView name = rowView.findViewById(R.id.Name);
             ImageView status = rowView.findViewById(R.id.Status);
 
-            if (name != null){
+            if (name != null) {
                 name.setText(resort.getName());
             }
 
             // Set image to Operating Status
-            if (status != null){
-                switch (resort.getOperating_status()){
+            if (status != null) {
+                switch (resort.getOperating_status()) {
                     case Operating:
                         status.setImageResource(R.drawable.open);
                         break;
@@ -53,6 +52,9 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
                         status.setImageResource(R.drawable.closed);
                         break;
                     case Unknown:
+                        status.setImageResource(R.drawable.unknown);
+                        break;
+                    default:
                         status.setImageResource(R.drawable.unknown);
                 }
             }

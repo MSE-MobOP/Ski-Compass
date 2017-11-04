@@ -1,4 +1,4 @@
-package mse_mobop.ski_compass;
+package mobop.skicompass;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

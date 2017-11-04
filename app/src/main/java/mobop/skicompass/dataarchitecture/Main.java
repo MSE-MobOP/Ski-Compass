@@ -3,7 +3,7 @@
  * C.Schmid, M.Messmer, A.Papaj
  * @author C.Schmid
  */
-package mse_mobop.ski_compass.DataArchitecture;
+package mobop.skicompass.dataarchitecture;
 
 public class Main {
     
@@ -12,7 +12,7 @@ public class Main {
     private double tempMax;
     
     public double getTemp() {
-        return temp;//calcTemp(temp);
+        return temp;
     }
 
     public double getTempMin() {

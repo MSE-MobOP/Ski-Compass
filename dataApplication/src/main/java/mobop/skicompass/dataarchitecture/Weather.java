@@ -3,7 +3,7 @@
  * C.Schmid, M.Messmer, A.Papaj
  * @author C.Schmid
  */
-package mse_mobop.ski_compass.DataArchitecture;
+package mobop.skicompass.dataarchitecture;
 
 public class Weather {
     

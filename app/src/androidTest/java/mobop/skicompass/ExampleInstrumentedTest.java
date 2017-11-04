@@ -1,4 +1,4 @@
-package mse_mobop.ski_compass;
+package mobop.skicompass;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

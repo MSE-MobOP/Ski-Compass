@@ -1,4 +1,4 @@
-package mse_mobop.ski_compass;
+package mobop.skicompass;
 
 import java.io.FileInputStream;
 import java.security.SecureRandom;
@@ -24,13 +24,13 @@ import com.google.gson.Gson;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
-import mse_mobop.ski_compass.DataArchitecture.SkiResort;
-import mse_mobop.ski_compass.DataArchitecture.WeatherData;
+import mobop.skicompass.dataarchitecture.SkiResort;
+import mobop.skicompass.dataarchitecture.WeatherData;
 
 public class DatabaseFill {
 
 	private static int[] resortsIDs = {
-			// 383 Graubünden
+			// 383 Graubï¿½nden
 			1012, 1017, 4398, /* 4396, */ 4395, 1018, 3801, 1009, 1014, 1016, 1011, 4397, 3712, 3728, 4981, 5029, 4050,
 			1010, 3722, 3721, 3799, 1015, 2405, 630, 3800, 4048, 1019,
 			// 385 Berner Oberland

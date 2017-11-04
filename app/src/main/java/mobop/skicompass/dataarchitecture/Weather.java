@@ -3,14 +3,14 @@
  * C.Schmid, M.Messmer, A.Papaj
  * @author C.Schmid
  */
-package mse_mobop.ski_compass.DataArchitecture;
+package mobop.skicompass.dataarchitecture;
 
 public class Weather {
     
-    public String icon;
-    public String description;
-    public String main;
-    public int id;
+    private String icon;
+    private String description;
+    private String main;
+    private int id;
 
     public int getId() {
         return id;

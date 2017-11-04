@@ -1,9 +1,8 @@
-package mse_mobop.ski_compass;
+package mobop.skicompass;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Do nothing
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     public Location getLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
-        //String provider = locationManager.getBestProvider(new Criteria(), true);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             for (String provider: providers) {
@@ -86,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return;
             }
+            default:
+                // do nothing
         }
     }
 

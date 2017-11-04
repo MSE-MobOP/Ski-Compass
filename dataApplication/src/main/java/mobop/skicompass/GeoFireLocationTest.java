@@ -1,4 +1,4 @@
-package mse_mobop.ski_compass;
+package mobop.skicompass;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

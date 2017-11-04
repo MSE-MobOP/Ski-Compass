@@ -1,4 +1,4 @@
-package mse_mobop.ski_compass.DataArchitecture;
+package mobop.skicompass.dataarchitecture;
 
 /**
  * Reflects the root of resort data from database

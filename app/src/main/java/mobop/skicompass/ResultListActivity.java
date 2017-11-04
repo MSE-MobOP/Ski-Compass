@@ -1,10 +1,9 @@
-package mse_mobop.ski_compass;
+package mobop.skicompass;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -13,8 +12,8 @@ import com.firebase.geofire.GeoLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-import mse_mobop.ski_compass.DataArchitecture.SkiResort;
-import mse_mobop.ski_compass.DataArchitecture.SkiResortArrayAdapter;
+import mobop.skicompass.dataarchitecture.SkiResort;
+import mobop.skicompass.dataarchitecture.SkiResortArrayAdapter;
 
 /**
  * Created by artanpapaj on 25.10.17.
@@ -37,10 +36,6 @@ public class ResultListActivity extends ListActivity {
         double latitude = intent.getDoubleExtra("Latitude", 0.0);
         double longitude = intent.getDoubleExtra("Longitude", 0.0);
         location = new GeoLocation(latitude, longitude);
-
-//        ArrayAdapter<SkiResort> adapter = new ArrayAdapter<SkiResort>(this, android.R.layout.simple_list_item_1, skiResorts);
-//        SkiResortManager.getInstance().loadNearestResorts(location, adapter);
-//        setListAdapter(adapter);
     }
 
     @Override
@@ -53,10 +48,10 @@ public class ResultListActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // construct and register the adapter
         SkiResortArrayAdapter adapter = new SkiResortArrayAdapter(this, skiResortList);
         setListAdapter(adapter);
-        SkiResortManager.getInstance().loadNearestResorts(location, adapter);
+        if (adapter.getCount() == 0) {
+            SkiResortManager.getInstance().loadNearestResorts(location, adapter);
+        }
     }
-
 }
