@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,15 +31,19 @@ public class DetailActivity extends AppCompatActivity {
         TextView detailText = (TextView) findViewById(R.id.detailText);
         int selectedItemNr = getIntent().getIntExtra("position", -1);
 
-        if (selectedItemNr == -1) {
-            // Error
-        }
+        ImageView weatherImage = (ImageView) findViewById(R.id.detailWeatherImage);
+
 
         selectedResort = ResultListActivity.skiResortList.get(selectedItemNr);
 
         detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
         detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
-        int test = Utils.getStringResourceByName(this, selectedResort.getWeatherData().getWeather().get(0).getDescription().replace(' ', '_'));
+
+        String weatherDescription = selectedResort.getWeatherData().getWeather().get(0).getDescription().replace(' ', '_');
+        int test = Utils.getStringResourceByName(this, weatherDescription);
+
+        weatherImage.setImageResource(WeatherManager.getImageIdFromDescription(weatherDescription));
+
         detailText.append(getResources().getText(R.string.detailWeather) + ": " + getResources().getText(test) + System.lineSeparator());//selectedResort.getWeatherData().getWeather().get(0).getDescription());
 
         detailText.append("ID: " + selectedResort.getId()); // debug only

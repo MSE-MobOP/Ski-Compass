@@ -13,4 +13,5 @@
     <string name="detailErrorNav">Google Maps nicht installiert!</string>
 
     <string name="broken_clouds">Bewölkt</string>
+    <string name="snow">Schneefall</string>
 </resources>
