@@ -42,7 +42,7 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
                 name.setText(resort.getName());
             }
 
-            // Set image to OPERATING Status
+            // Set image to Operating Status
             if (status != null) {
                 switch (resort.getOperatingStatus()) {
                     case Operating:

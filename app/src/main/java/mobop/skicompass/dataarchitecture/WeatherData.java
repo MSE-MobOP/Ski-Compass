@@ -5,16 +5,17 @@
  */
 package mobop.skicompass.dataarchitecture;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherData {
+public class WeatherData implements Serializable {
 
-	@SerializedName("main")
+	//@SerializedName("main")
 	private Main main;
 	
-	@SerializedName("weather")
+	//@SerializedName("weather")
 	private List<Weather> weather;
 
 	public Main getMain() {

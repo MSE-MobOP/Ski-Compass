@@ -2,10 +2,12 @@ package mobop.skicompass.dataarchitecture;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Reflects the root of resort data from database
  */
-public class SkiResort {
+public class SkiResort implements Serializable {
 
 	@SerializedName("id")
 	private int id;
@@ -22,7 +24,7 @@ public class SkiResort {
 	@SerializedName("official_website")
 	private String officialWebsite;
 	
-	@SerializedName("weatherData")
+	//@SerializedName("weatherData")
 	private WeatherData weatherData;
         
         @SerializedName("longitude")

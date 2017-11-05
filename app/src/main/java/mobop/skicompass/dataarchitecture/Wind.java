@@ -7,7 +7,9 @@ package mobop.skicompass.dataarchitecture;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Wind {
+import java.io.Serializable;
+
+public class Wind implements Serializable {
     
 	@SerializedName("deg")
     private String deg;

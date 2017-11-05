@@ -8,6 +8,8 @@ import mobop.skicompass.R;
 
 public class WeatherManager {
 
+    private WeatherManager(){}
+
     public static int getImageIdFromDescription(String description) {
         switch(description) {
             case "snow":

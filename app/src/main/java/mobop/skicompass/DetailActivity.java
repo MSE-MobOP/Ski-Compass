@@ -19,7 +19,7 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 
 public class DetailActivity extends AppCompatActivity {
 
-    SkiResort selectedResort;
+    private SkiResort selectedResort;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,12 +29,9 @@ public class DetailActivity extends AppCompatActivity {
         addButtonListener();
 
         TextView detailText = (TextView) findViewById(R.id.detailText);
-        int selectedItemNr = getIntent().getIntExtra("position", -1);
-
         ImageView weatherImage = (ImageView) findViewById(R.id.detailWeatherImage);
 
-
-        selectedResort = ResultListActivity.skiResortList.get(selectedItemNr);
+        selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
         detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
         detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
@@ -44,8 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
         weatherImage.setImageResource(WeatherManager.getImageIdFromDescription(weatherDescription));
 
-        detailText.append(getResources().getText(R.string.detailWeather) + ": " + getResources().getText(test) + System.lineSeparator());//selectedResort.getWeatherData().getWeather().get(0).getDescription());
-
+        detailText.append(getResources().getText(R.string.detailWeather) + ": " + getResources().getText(test) + System.lineSeparator());
         detailText.append("ID: " + selectedResort.getId()); // debug only
 
     }

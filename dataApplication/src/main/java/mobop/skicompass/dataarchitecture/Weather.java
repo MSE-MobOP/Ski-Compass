@@ -7,7 +7,9 @@ package mobop.skicompass.dataarchitecture;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Weather {
+import java.io.Serializable;
+
+public class Weather implements Serializable{
     
 	@SerializedName("icon")
     public String icon;
