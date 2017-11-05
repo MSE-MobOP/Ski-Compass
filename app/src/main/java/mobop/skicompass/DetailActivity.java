@@ -18,7 +18,6 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private TextView detailText;
     SkiResort selectedResort;
 
     @Override
@@ -28,7 +27,7 @@ public class DetailActivity extends AppCompatActivity {
 
         addButtonListener();
 
-        detailText = (TextView) findViewById(R.id.detailText);
+        TextView detailText = (TextView) findViewById(R.id.detailText);
         int selectedItemNr = getIntent().getIntExtra("position", -1);
 
         if (selectedItemNr == -1) {
@@ -37,10 +36,12 @@ public class DetailActivity extends AppCompatActivity {
 
         selectedResort = ResultListActivity.skiResortList.get(selectedItemNr);
 
-        detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + "\n");
-        detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + "\n");
-        detailText.append(getResources().getText(R.string.detailWeather) + ": " + selectedResort.getWeatherData().getWeather().get(0).getDescription());
+        detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
+        detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
+        int test = Utils.getStringResourceByName(this, selectedResort.getWeatherData().getWeather().get(0).getDescription().replace(' ', '_'));
+        detailText.append(getResources().getText(R.string.detailWeather) + ": " + getResources().getText(test) + System.lineSeparator());//selectedResort.getWeatherData().getWeather().get(0).getDescription());
 
+        detailText.append("ID: " + selectedResort.getId()); // debug only
 
     }
 
@@ -54,7 +55,6 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-
     private void createMapIntent() {
         String latLong = selectedResort.getLatitude() + "," + selectedResort.getLongitude();
         Uri mapsIntentUri = Uri.parse("geo:" + latLong + "?z=10&q=" + latLong + "(" + selectedResort.getName() + ")");
@@ -67,4 +67,5 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorNav), Toast.LENGTH_LONG).show();
         }
     }
+
 }
