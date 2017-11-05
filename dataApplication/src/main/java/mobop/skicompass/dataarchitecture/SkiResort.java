@@ -24,6 +24,12 @@ public class SkiResort {
 	
 	@SerializedName("weatherData")
 	private WeatherData weatherData;
+        
+        @SerializedName("longitude")
+        private double longitude;
+        
+        @SerializedName("latitude")
+        private double latitude;
 
 	public int getId() {
 		return id;
@@ -52,6 +58,14 @@ public class SkiResort {
 	public void setWeatherData(WeatherData weatherData) {
 		this.weatherData = weatherData;
 	}
+        
+        public double getLongitude() {
+            return longitude;
+        }
+        
+        public double getLatitude() {
+            return latitude;
+        }
 
 	@Override
 	public String toString() {

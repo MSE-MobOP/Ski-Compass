@@ -5,4 +5,10 @@
     <string name="example_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam </string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="weather">Wetter</string>
+
+    <string name="detailName">Name</string>
+    <string name="detailOperatingStatus">Status</string>
+    <string name="detailWeather">Wetter</string>
+    <string name="detailNavButtonName">Navigate to location</string>
+    <string name="detailErrorNav">Google maps not installed!</string>
 </resources>

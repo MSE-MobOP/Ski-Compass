@@ -118,7 +118,7 @@ public class DatabaseFill {
 			if (id == 1012) {
 				System.out.println("ID: " + skiResort.getId());
 				System.out.println("NAME: " + skiResort.getName());
-				//System.out.println("WEATHER: " + skiResort.getWeatherData().getWeather().description);
+				System.out.println("LAT: " + skiResort.getLatitude());
 				System.out.println("TEMP: " + skiResort.getWeatherData().getMain().getTemp());
 			}
 		}

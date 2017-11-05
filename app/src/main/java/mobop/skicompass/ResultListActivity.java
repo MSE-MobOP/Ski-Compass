@@ -20,7 +20,7 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 
 public class ResultListActivity extends ListActivity {
 
-    private List<SkiResort> skiResortList;
+    public static List<SkiResort> skiResortList;
     private GeoLocation location;
 
     @Override
@@ -41,6 +41,7 @@ public class ResultListActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Toast.makeText(getApplicationContext(), "Position :" + position, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 
