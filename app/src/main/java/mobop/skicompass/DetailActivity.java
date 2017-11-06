@@ -1,6 +1,8 @@
 package mobop.skicompass;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,28 +32,36 @@ public class DetailActivity extends AppCompatActivity {
         selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
         addButtonListeners();
+        checkWebButton();
+        setWeatherIcon();
+
 
         TextView detailText = (TextView) findViewById(R.id.detailText);
-        ImageView weatherImage = (ImageView) findViewById(R.id.detailWeatherImage);
-
-        checkWebButton();
 
         detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
         detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
-
-        String weatherDescription = selectedResort.getWeatherData().getWeather().get(0).getDescription().replace(' ', '_');
-        int test = Utils.getStringResourceByName(this, weatherDescription);
-
-        weatherImage.setImageResource(WeatherManager.getImageIdFromDescription(weatherDescription));
 
         detailText.append(getResources().getText(R.string.detailWeather) + ": " +  System.lineSeparator());//getResources().getText(test) +
         detailText.append("ID: " + selectedResort.getId()); // debug only
 
     }
 
+    private void setWeatherIcon() {
+        String weatherIconName = selectedResort.getWeatherData().getWeather().get(0).getIcon();
+        if (weatherIconName.isEmpty() || weatherIconName.equals(""))
+            Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeatherIcon), Toast.LENGTH_LONG).show();
+
+        System.out.println("*******************************http://openweathermap.org/img/w/" + weatherIconName + ".png");
+        Drawable weatherIcon = Utils.getDrawableFromUrl("http://openweathermap.org/img/w/" + weatherIconName + ".png");
+        ((ImageView) findViewById(R.id.detailWeatherImage)).setImageDrawable(weatherIcon);
+    }
+
     private void checkWebButton() {
-        if (selectedResort.getOfficialWebsite() == null)
-            findViewById(R.id.detailWebButton).setEnabled(false);
+        if (selectedResort.getOfficialWebsite() == null) {
+            ImageButton imgButton = (ImageButton) findViewById(R.id.detailWebButton);
+            imgButton.setEnabled(false);
+            imgButton.setBackground(getResources().getDrawable(R.mipmap.detail_web_deactivated));
+        }
     }
 
     private void addButtonListeners() {

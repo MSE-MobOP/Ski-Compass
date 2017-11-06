@@ -15,4 +15,5 @@
     <string name="broken_clouds">Broken Clouds</string>
     <string name="detailWebButtonName">Navigate to website</string>
     <string name="detailErrorWeb">No web browser installed!</string>
+    <string name="detailErrorWeatherIcon">Can\'t find the weather icon</string>
 </resources>
