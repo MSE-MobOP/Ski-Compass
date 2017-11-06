@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import mobop.skicompass.dataarchitecture.SkiResort;
 
 /**
@@ -50,10 +52,15 @@ public class DetailActivity extends AppCompatActivity {
         String weatherIconName = selectedResort.getWeatherData().getWeather().get(0).getIcon();
         if (weatherIconName.isEmpty() || weatherIconName.equals(""))
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeatherIcon), Toast.LENGTH_LONG).show();
-
-        System.out.println("*******************************http://openweathermap.org/img/w/" + weatherIconName + ".png");
-        Drawable weatherIcon = Utils.getDrawableFromUrl("http://openweathermap.org/img/w/" + weatherIconName + ".png");
-        ((ImageView) findViewById(R.id.detailWeatherImage)).setImageDrawable(weatherIcon);
+        ImageView weatherView = (ImageView) findViewById(R.id.detailWeatherImage);
+        Picasso picasso = new Picasso.Builder(getApplicationContext()).listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception e) {
+                e.printStackTrace();
+            }
+        }).build();
+        picasso.setLoggingEnabled(true);
+        picasso.load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
     private void checkWebButton() {
