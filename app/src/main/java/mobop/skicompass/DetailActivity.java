@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void addButtonListeners() {
-        Button navButton = (Button) findViewById(R.id.detailNavButton);
+        ImageButton navButton = (ImageButton) findViewById(R.id.detailNavButton);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button webButton = (Button) findViewById(R.id.detailWebButton);
+        ImageButton webButton = (ImageButton) findViewById(R.id.detailWebButton);
         webButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

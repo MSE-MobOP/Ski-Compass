@@ -7,26 +7,10 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <ImageView
-        android:id="@+id/detailImageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="0.33"
-        android:contentDescription="@string/detail_image_alt"
-        android:src="@drawable/mountain" />
-
-    <ImageView
-        android:id="@+id/detailWeatherImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/app"
-        android:layout_weight="0.02" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="0.21">
 
         <LinearLayout
@@ -36,39 +20,62 @@
             android:paddingBottom="16dp"
             android:paddingTop="8dp">
 
+            <ImageView
+                android:id="@+id/detailImageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="0.33"
+                android:contentDescription="@string/detail_image_alt"
+                android:src="@drawable/mountain" />
+
+            <ImageView
+                android:id="@+id/detailWeatherImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="0.02"
+                app:srcCompat="@drawable/app" />
+
             <TextView
                 android:id="@+id/detailText"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="80dp"
+                android:layout_weight="0.89"
                 android:paddingBottom="4dp"
                 android:paddingTop="4dp"
                 android:text="@string/example_text" />
 
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:columnCount="2"
+                android:rowCount="1">
+
+                <ImageButton
+                    android:id="@+id/detailNavButton"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/detail_nav"
+                    android:scaleType="fitXY" />
+
+                <ImageButton
+                    android:id="@+id/detailWebButton"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/detail_web"
+                    android:scaleType="fitXY" />
+
+            </GridLayout>
+
         </LinearLayout>
 
+
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/detailNavButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/detailNavButtonName" />
-
-        <Button
-            android:id="@+id/detailWebButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/detailWebButtonName"/>
-
-    </LinearLayout>
 
 
 </LinearLayout>
