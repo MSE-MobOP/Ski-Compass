@@ -16,7 +16,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+
     private Location location;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
         } else {
-            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);   // Emulator does not work with Network_Provider
+            if (true){ //location == null) {
+                //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+                locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null);
+                //locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+                locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
+                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);   // Emulator does not work with Network_Provider
+            }
         }
     }
 
@@ -67,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         list(SortPriority.WEATHER);
     }
 
-    private void list(SortPriority sortPriority){
+    private void list(SortPriority sortPriority) {
         if (location == null) {
             Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
             return;
@@ -87,9 +94,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onLocationChanged(Location location) {
         // Called when new Location is found
-        if (this.location == null){
+        if (this.location == null) {
             this.location = location;
-        } else if (location != null && location.getAccuracy() < this.location.getAccuracy()){
+            locationManager.removeUpdates(this);
+            locationManager.removeUpdates(this);
+        } else if (location != null && location.getAccuracy() < this.location.getAccuracy()) {
             this.location = location;
         }
     }
