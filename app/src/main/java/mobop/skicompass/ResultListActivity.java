@@ -53,7 +53,7 @@ public class ResultListActivity extends ListActivity {
         SkiResortArrayAdapter adapter = new SkiResortArrayAdapter(this, skiResortList);
         setListAdapter(adapter);
         if (adapter.getCount() == 0) {
-            SkiResortManager.getInstance().loadNearestResorts(location, adapter);
+            SkiResortManager.getInstance().loadNearestResorts(location, adapter, sortPriority);
         }
     }
 }

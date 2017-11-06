@@ -7,19 +7,20 @@
     android:paddingRight="16dp">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/listDistanceButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Set a fantasy location to db" />
+        android:onClick="listByDistance"
+        android:text="List by Distance"/>
 
     <Button
-        android:id="@+id/listButton"
+        android:id="@+id/listWeatherButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="testList"
-        android:text="Test List"/>
+        android:onClick="listByWeather"
+        android:text="List by Weather"/>
 
     <Button
         android:id="@+id/detailButton"

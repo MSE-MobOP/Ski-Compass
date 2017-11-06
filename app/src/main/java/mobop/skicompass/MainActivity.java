@@ -59,7 +59,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
 
-    public void testList(View v) {
+    public void listByDistance(View v) {
+        list(SortPriority.LOCATION);
+    }
+
+    public void listByWeather(View v) {
+        list(SortPriority.WEATHER);
+    }
+
+    private void list(SortPriority sortPriority){
         if (location == null) {
             Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
             return;
@@ -67,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Intent intent = new Intent(this, ResultListActivity.class);
         intent.putExtra("Latitude", location.getLatitude());
         intent.putExtra("Longitude", location.getLongitude());
-        intent.putExtra("SortPriority", SortPriority.LOCATION);
+        intent.putExtra("SortPriority", sortPriority);
         startActivity(intent);
     }
 
