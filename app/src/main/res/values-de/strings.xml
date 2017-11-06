@@ -14,4 +14,6 @@
 
     <string name="broken_clouds">Bewölkt</string>
     <string name="snow">Schneefall</string>
+    <string name="detailWebButtonName">Website anzeigen</string>
+    <string name="detailErrorWeb">Kein Webbrowser installiert!</string>
 </resources>

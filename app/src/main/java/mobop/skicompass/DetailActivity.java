@@ -26,12 +26,14 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_layout);
 
-        addButtonListener();
+        selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
+
+        addButtonListeners();
 
         TextView detailText = (TextView) findViewById(R.id.detailText);
         ImageView weatherImage = (ImageView) findViewById(R.id.detailWeatherImage);
 
-        selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
+        checkWebButton();
 
         detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
         detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
@@ -41,12 +43,17 @@ public class DetailActivity extends AppCompatActivity {
 
         weatherImage.setImageResource(WeatherManager.getImageIdFromDescription(weatherDescription));
 
-        detailText.append(getResources().getText(R.string.detailWeather) + ": " + getResources().getText(test) + System.lineSeparator());
+        detailText.append(getResources().getText(R.string.detailWeather) + ": " +  System.lineSeparator());//getResources().getText(test) +
         detailText.append("ID: " + selectedResort.getId()); // debug only
 
     }
 
-    private void addButtonListener() {
+    private void checkWebButton() {
+        if (selectedResort.getOfficialWebsite() == null)
+            findViewById(R.id.detailWebButton).setEnabled(false);
+    }
+
+    private void addButtonListeners() {
         Button navButton = (Button) findViewById(R.id.detailNavButton);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +61,24 @@ public class DetailActivity extends AppCompatActivity {
                 createMapIntent();
             }
         });
+
+        Button webButton = (Button) findViewById(R.id.detailWebButton);
+        webButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createWebIntent();
+            }
+        });
+    }
+
+    private void createWebIntent() {
+        Intent webIntent = new Intent(Intent.ACTION_VIEW);
+        webIntent.setData(Uri.parse(selectedResort.getOfficialWebsite()));
+        if (webIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(webIntent);
+        } else {
+            Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeb), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void createMapIntent() {
