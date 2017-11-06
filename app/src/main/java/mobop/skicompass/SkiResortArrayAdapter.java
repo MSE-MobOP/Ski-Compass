@@ -39,7 +39,7 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
             ImageView status = rowView.findViewById(R.id.Status);
 
             if (name != null) {
-                name.setText(resort.getName());
+                name.setText(resort.getName() + resort.getWeatherData().getClouds().getAll());
             }
 
             // Set image to Operating Status

@@ -22,6 +22,7 @@ public class ResultListActivity extends ListActivity {
 
     private List<SkiResort> skiResortList;
     private GeoLocation location;
+    private SortPriority sortPriority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class ResultListActivity extends ListActivity {
         Intent intent = getIntent();
         double latitude = intent.getDoubleExtra("Latitude", 0.0);
         double longitude = intent.getDoubleExtra("Longitude", 0.0);
+        sortPriority = (SortPriority)intent.getSerializableExtra("SortPriority");
         location = new GeoLocation(latitude, longitude);
     }
 

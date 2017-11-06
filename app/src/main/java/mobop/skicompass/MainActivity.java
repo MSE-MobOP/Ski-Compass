@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         } else {
             LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);   // Emulator does not work with Network_Provider
         }
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Intent intent = new Intent(this, ResultListActivity.class);
         intent.putExtra("Latitude", location.getLatitude());
         intent.putExtra("Longitude", location.getLongitude());
+        intent.putExtra("SortPriority", SortPriority.LOCATION);
         startActivity(intent);
     }
 
@@ -77,7 +79,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onLocationChanged(Location location) {
         // Called when new Location is found
-        this.location = location;
+        if (this.location == null){
+            this.location = location;
+        } else if (location != null && location.getAccuracy() < this.location.getAccuracy()){
+            this.location = location;
+        }
     }
 
     @Override
