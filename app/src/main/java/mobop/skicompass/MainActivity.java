@@ -43,12 +43,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         } else {
             locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (true){ //location == null) {
-                //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            if (location == null) {
                 locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null);
-                //locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, 0, 0, this);
                 locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
-                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);   // Emulator does not work with Network_Provider
             }
         }
     }
