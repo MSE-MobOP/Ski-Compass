@@ -1,24 +1,15 @@
 package mobop.skicompass;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.JsonNode;
@@ -49,9 +40,12 @@ public class DatabaseFill {
 
 	public static void main(String[] args) throws Exception {
 		// Initialize Firebase Database Connection
-		FileInputStream serviceAccount = new FileInputStream("ski-compass-firebase-adminsdk-9ojmj-a8522c42f9.json");
-		FirebaseOptions options = new FirebaseOptions.Builder().setServiceAccount(serviceAccount)
-				.setDatabaseUrl("https://ski-compass.firebaseio.com/").build();
+		File dir = new File(".");
+		File admin_sdk_key_file = dir.listFiles((directory, name) -> name.startsWith("ski-compass-firebase-adminsdk") && name.endsWith(".json"))[0];
+		FileInputStream serviceAccount = new FileInputStream(admin_sdk_key_file.getAbsolutePath());
+		FirebaseOptions options = new FirebaseOptions.Builder()
+				.setServiceAccount(serviceAccount)
+				.setDatabaseUrl("https://ski-compass.firebaseio.com").build();
 		FirebaseApp.initializeApp(options);
 		FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -60,35 +54,6 @@ public class DatabaseFill {
 		GeoFire geoFire = new GeoFire(database.getReference("GeoFire"));
 
 		Gson gson = new Gson();
-
-		// Start Workaround with outdated SSL Certificate from skimap.org
-		try {
-			SSLContext ctx = SSLContext.getInstance("TLS");
-			ctx.init(new KeyManager[0], new TrustManager[] { new X509TrustManager() {
-
-				@Override
-				public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-				}
-
-				@Override
-				public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-				}
-
-				@Override
-				public X509Certificate[] getAcceptedIssuers() {
-					return null;
-				}
-			} }, new SecureRandom());
-
-			SSLContext.setDefault(ctx);
-			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(ctx,
-					SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-			Unirest.setHttpClient(httpclient);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		// End Workaround
 
 		for (int id : resortsIDs) {
 
@@ -112,7 +77,13 @@ public class DatabaseFill {
 			skiResort.setWeatherData(gson.fromJson(weatherJson, WeatherData.class));
 
 			// Put resort data to firebase database
-			skiResorts.child(Integer.toString(id)).setValue(skiResort);
+			skiResorts.child(Integer.toString(id)).setValue(skiResort, new CompletionListener() {
+				
+				@Override
+				public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+					System.out.println("Transver Completed!");
+				}
+			});
 
 			// save one json to file for testing
 			if (id == 1012) {
