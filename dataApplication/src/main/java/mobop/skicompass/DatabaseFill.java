@@ -91,20 +91,22 @@ public class DatabaseFill {
 	}
 
 	private static void generateRandomSkiResortData(SkiResort skiResort) {
-		switch (random.nextInt(2)) {
+		switch (random.nextInt(2)) {			// Set this to 3 to get Resorts with Unknown Operating Status
 		case 0:
 			skiResort.setOperatingStatus(OperatingStatus.Operating);
 			break;
 		case 1:
 			skiResort.setOperatingStatus(OperatingStatus.Closed);
 			break;
+		case 2:
+			skiResort.setOperatingStatus(OperatingStatus.Unknown);
 		}
 
 		skiResort.setTotalLifts(random.nextInt(20));
 		skiResort.setTotalSlops(Math.round(random.nextDouble() * 1500) / 10);
 
 		if (skiResort.getOperatingStatus() == OperatingStatus.Operating) {
-			skiResort.setOpenedLifts((int) (skiResort.getOpenedLifts() * random.nextDouble()));
+			skiResort.setOpenedLifts((int) (skiResort.getTotalLifts() * random.nextDouble()));
 			skiResort.setOpenedSlops(Math.round(skiResort.getTotalSlops() * random.nextDouble() * 10) / 10);
 		}
 

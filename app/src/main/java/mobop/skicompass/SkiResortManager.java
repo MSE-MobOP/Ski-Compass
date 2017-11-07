@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Comparator;
 
+import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
 
 import static android.content.ContentValues.TAG;
@@ -92,21 +93,30 @@ public class SkiResortManager {
     }
 
     private void sortingList(ArrayAdapter<SkiResort> adapter, SortPriority sortPriority) {
-        Comparator<SkiResort> comperator;
+        Comparator<SkiResort> comparator;
         switch (sortPriority) {
             case LOCATION:
-                comperator = new DistanceComperator();
+                comparator = new DistanceComparator();
                 break;
             case WEATHER:
-                comperator = new WeatherComperator();
+                comparator = new WeatherComparator();
+                break;
+            case OPERATING:
+                comparator = new OperatingComparator();
+                break;
+            case OPENED_LIFTS:
+                comparator = new OpenedLiftsComparator();
+                break;
+            case OPENED_SLOPS:
+                comparator = new OpenedSlopsComparator();
                 break;
             default:
-                comperator = new DistanceComperator();
+                comparator = new DistanceComparator();
         }
-        adapter.sort(comperator);
+        adapter.sort(comparator);
     }
 
-    private class DistanceComperator implements Comparator<SkiResort> {
+    private class DistanceComparator implements Comparator<SkiResort> {
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
             // nothing to do because list is default Sorted by Distance with Atom-Bomb Search Algorithm
@@ -114,11 +124,37 @@ public class SkiResortManager {
         }
     }
 
-    private class WeatherComperator implements Comparator<SkiResort> {
+    private class WeatherComparator implements Comparator<SkiResort> {
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
             return Integer.compare(skiResort.getWeatherData().getClouds().getAll(),
                     t1.getWeatherData().getClouds().getAll());
+        }
+    }
+
+    private class OperatingComparator implements  Comparator<SkiResort>{
+
+        @Override
+        public int compare(SkiResort skiResort, SkiResort t1) {
+            return Integer.compare(skiResort.getOperatingStatus().getValue(), t1.getOperatingStatus().getValue());
+        }
+    }
+
+    private class OpenedLiftsComparator implements  Comparator<SkiResort>{
+
+        @Override
+        public int compare(SkiResort skiResort, SkiResort t1) {
+            // Changed -> More is better
+            return Integer.compare(t1.getOpenedLifts(), skiResort.getOpenedLifts());
+        }
+    }
+
+    private class OpenedSlopsComparator implements  Comparator<SkiResort>{
+
+        @Override
+        public int compare(SkiResort skiResort, SkiResort t1) {
+            // More is Better
+            return Double.compare(t1.getOpenedSlops(), skiResort.getOpenedSlops());
         }
     }
 }

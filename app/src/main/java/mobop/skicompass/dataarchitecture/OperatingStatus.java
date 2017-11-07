@@ -7,7 +7,17 @@ import java.io.Serializable;
  * Christian: Cant be uppercase -> gson serialization failure, even with annotation @SerializedName
  */
 public enum OperatingStatus implements Serializable{
-    Operating,
-    Unknown,
-    Closed,
+    Operating(1),
+    Unknown(2),
+    Closed(3);
+
+    private int value;
+
+    private OperatingStatus(int value){
+        this.value = value;
+    }
+
+    public int getValue(){
+        return value;
+    }
 }

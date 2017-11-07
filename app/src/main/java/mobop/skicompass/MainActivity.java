@@ -71,6 +71,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         list(SortPriority.WEATHER);
     }
 
+    public void listByOperatingStatus(View v) {
+        list(SortPriority.OPERATING);
+    }
+
+    public void listByOpenedLIfts(View v){
+        list(SortPriority.OPENED_LIFTS);
+    }
+
+    public void listByOpenedSlops(View v){
+        list(SortPriority.OPENED_SLOPS);
+    }
+
     private void list(SortPriority sortPriority) {
         if (location == null) {
             Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
