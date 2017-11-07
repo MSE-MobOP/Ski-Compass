@@ -33,10 +33,13 @@ public class DetailActivity extends AppCompatActivity {
 
         selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
-        addButtonListeners();
+        setTitle(selectedResort.getName());
+        TextView weatherDescription = (TextView)findViewById(R.id.WeatherDescription);
+        weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescription());
+
+
         checkWebButton();
         setWeatherIcon();
-
 
         TextView detailText = (TextView) findViewById(R.id.detailText);
 
@@ -71,35 +74,19 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void addButtonListeners() {
-        ImageButton navButton = (ImageButton) findViewById(R.id.detailNavButton);
-        navButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createMapIntent();
+    public void createWebIntent(View v) {
+        if (selectedResort.getOfficialWebsite() != null) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            webIntent.setData(Uri.parse(selectedResort.getOfficialWebsite()));
+            if (webIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(webIntent);
+            } else {
+                Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeb), Toast.LENGTH_LONG).show();
             }
-        });
-
-        ImageButton webButton = (ImageButton) findViewById(R.id.detailWebButton);
-        webButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createWebIntent();
-            }
-        });
-    }
-
-    private void createWebIntent() {
-        Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(selectedResort.getOfficialWebsite()));
-        if (webIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(webIntent);
-        } else {
-            Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeb), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void createMapIntent() {
+    public void createMapIntent(View v) {
         String latLong = selectedResort.getLatitude() + "," + selectedResort.getLongitude();
         Uri mapsIntentUri = Uri.parse("geo:" + latLong + "?z=10&q=" + latLong + "(" + selectedResort.getName() + ")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);

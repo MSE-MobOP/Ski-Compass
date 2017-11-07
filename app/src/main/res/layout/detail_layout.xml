@@ -8,7 +8,6 @@
     android:paddingRight="16dp"
     android:weightSum="1">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,12 +29,30 @@
                 android:contentDescription="@string/detail_image_alt"
                 android:src="@drawable/mountain" />
 
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="3"
+                android:rowCount="5"
+                >
+
+                <TextView
+                    android:text="@string/detailWeather"
+                    android:layout_columnWeight="1"/>
+                <TextView
+                    android:id="@+id/WeatherDescription"
+                    android:layout_columnWeight="1"
+                    android:text="default"
+                    android:gravity="right"/>
+
+            </GridLayout>
+
             <ImageView
                 android:id="@+id/detailWeatherImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="0.02"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:srcCompat="@drawable/app" />
+
 
             <TextView
                 android:id="@+id/detailText"
@@ -60,7 +77,9 @@
                     android:layout_gravity="left|top"
                     android:layout_marginLeft="70dp"
                     android:background="@mipmap/detail_nav"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:onClick="createMapIntent"
+                    />
 
                 <ImageButton
                     android:id="@+id/detailWebButton"
@@ -69,7 +88,8 @@
                     android:layout_gravity="right|top"
                     android:layout_marginRight="70dp"
                     android:background="@mipmap/detail_web"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:onClick="createWebIntent"/>
 
             </GridLayout>
 
