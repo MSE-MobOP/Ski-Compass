@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+    android:paddingTop="8dp">
 
     <Button
         android:id="@+id/listDistanceButton"
@@ -21,13 +22,5 @@
         android:gravity="center"
         android:onClick="listByWeather"
         android:text="List by Weather"/>
-
-    <Button
-        android:id="@+id/detailButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="testDetail"
-        android:text="Test Detail"/>
 
 </LinearLayout>

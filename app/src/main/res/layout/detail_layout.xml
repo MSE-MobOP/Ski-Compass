@@ -84,12 +84,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/detailWebButtonName"/>
+        android:text="@string/detailWebButtonName"
+        android:onClick="createMapIntent" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/detailNavButtonName" />
+        android:text="@string/detailNavButtonName"
+        android:onClick="createWebIntent" />
 
     <TextView
         android:id="@+id/detailText"

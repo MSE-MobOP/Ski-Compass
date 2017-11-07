@@ -95,11 +95,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         startActivity(intent);
     }
 
-    public void testDetail(View v) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onLocationChanged(Location location) {
         // Called when new Location is found
