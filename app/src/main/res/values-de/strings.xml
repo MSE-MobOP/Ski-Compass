@@ -2,13 +2,16 @@
     <string name="app_name">Ski-Compass</string>
     <string name="nodata">Keine Daten</string>
     <string name="detail_image_alt">Abbildung des Skigebiets</string>
-    <string name="example_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam </string>
+    <string name="example_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</string>
     <string name="title_activity_detail">Details</string>
     <string name="weather">Wetter</string>
 
     <string name="detailName">Name</string>
     <string name="detailOperatingStatus">Status</string>
     <string name="detailWeather">Wetter</string>
+    <string name="detailWeatherDefault">Standard</string>
+    <string name="detailStatus">Status</string>
+    <string name="detailStatusDefault">Unbekannt</string>
     <string name="detailNavButtonName">In Google Maps öffnen</string>
     <string name="detailErrorNav">Google Maps nicht installiert!</string>
 

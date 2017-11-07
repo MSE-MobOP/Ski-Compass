@@ -1,18 +1,22 @@
 <resources>
     <string name="app_name">Ski-Compass</string>
     <string name="nodata">No Data</string>
-    <string name="detail_image_alt">Abbildung des Skigebiets</string>
-    <string name="example_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam </string>
+    <string name="detail_image_alt">Illustration of the ski resort</string>
+    <string name="example_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</string>
     <string name="title_activity_detail">Details</string>
     <string name="weather">Weather</string>
 
     <string name="detailName">Name</string>
     <string name="detailOperatingStatus">Status</string>
     <string name="detailWeather">Weather</string>
-    <string name="detailNavButtonName">Navigate to location</string>
+    <string name="detailWeatherDefault">Default</string>
+    <string name="detailStatus">Status</string>
+    <string name="detailStatusDefault">Unknown</string>
+    <string name="detailNavButtonName">Open in Google Maps</string>
     <string name="detailErrorNav">Google maps not installed!</string>
 
     <string name="broken_clouds">Broken Clouds</string>
+    <string name="snow">Snow</string>
     <string name="detailWebButtonName">Navigate to website</string>
     <string name="detailErrorWeb">No web browser installed!</string>
     <string name="detailErrorWeatherIcon">Can\'t find the weather icon</string>

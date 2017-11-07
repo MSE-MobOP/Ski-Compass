@@ -8,95 +8,123 @@
     android:paddingRight="16dp"
     android:weightSum="1">
 
-    <ScrollView
+
+    <ImageView
+        android:id="@+id/detailImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/detail_image_alt"
+        android:src="@drawable/mountain" />
 
-        <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/detailWeatherSubheading"
+            android:text="@string/detailWeather"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp">
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textSize="16sp"/>
 
-            <ImageView
-                android:id="@+id/detailImageView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="0.33"
-                android:contentDescription="@string/detail_image_alt"
-                android:src="@drawable/mountain" />
+        <ImageView
+            android:id="@+id/detailWeatherImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/detailWeatherSubheading"
+            android:layout_alignParentLeft="true"
+            app:srcCompat="@drawable/app" />
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:columnCount="3"
-                android:rowCount="5"
-                >
+        <TextView
+            android:id="@+id/WeatherDescription"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/detailWeatherSubheading"
+            android:layout_toRightOf="@id/detailWeatherImage"
+            android:layout_alignParentRight="true"
+            android:paddingHorizontal="8dp"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:text="@string/detailWeatherDefault"/>
 
-                <TextView
-                    android:text="@string/detailWeather"
-                    android:layout_columnWeight="1"/>
-                <TextView
-                    android:id="@+id/WeatherDescription"
-                    android:layout_columnWeight="1"
-                    android:text="default"
-                    android:gravity="right"/>
+        <TextView
+            android:id="@+id/detailStatusSubheading"
+            android:text="@string/detailStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detailWeatherImage"
+            android:textAllCaps="true"
+            android:textSize="16sp"/>
 
-            </GridLayout>
+        <ImageView
+            android:id="@+id/detailStatusImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/detailStatusSubheading"
+            android:layout_alignParentLeft="true"
+            app:srcCompat="@drawable/open" />
 
-            <ImageView
-                android:id="@+id/detailWeatherImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/app" />
+        <TextView
+            android:id="@+id/StatusDescription"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:paddingHorizontal="8dp"
+            android:gravity="center_vertical"
+            android:layout_below="@id/detailStatusSubheading"
+            android:layout_toRightOf="@id/detailStatusImage"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp"
+            android:text="@string/detailStatusDefault"/>
 
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/detailText"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_weight="0.89"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
-                android:text="@string/example_text" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detailWebButtonName"/>
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:columnCount="2"
-                android:rowCount="1">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detailNavButtonName" />
 
-                <ImageButton
-                    android:id="@+id/detailNavButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="left|top"
-                    android:layout_marginLeft="70dp"
-                    android:background="@mipmap/detail_nav"
-                    android:scaleType="fitXY"
-                    android:onClick="createMapIntent"
-                    />
+    <TextView
+        android:id="@+id/detailText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="4dp"
+        android:text="@string/example_text" />
 
-                <ImageButton
-                    android:id="@+id/detailWebButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="right|top"
-                    android:layout_marginRight="70dp"
-                    android:background="@mipmap/detail_web"
-                    android:scaleType="fitXY"
-                    android:onClick="createWebIntent"/>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:columnCount="2"
+        android:rowCount="1">
 
-            </GridLayout>
+        <ImageButton
+            android:id="@+id/detailNavButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left|top"
+            android:layout_marginLeft="70dp"
+            android:background="@mipmap/detail_nav"
+            android:scaleType="fitXY"
+            android:onClick="createMapIntent" />
 
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/detailWebButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="70dp"
+            android:background="@mipmap/detail_web"
+            android:scaleType="fitXY"
+            android:onClick="createWebIntent" />
 
-
-    </ScrollView>
-
+    </GridLayout>
 
 </LinearLayout>
