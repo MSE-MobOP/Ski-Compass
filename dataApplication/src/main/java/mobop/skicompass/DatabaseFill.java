@@ -2,6 +2,7 @@ package mobop.skicompass;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Random;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -15,11 +16,13 @@ import com.google.gson.Gson;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
+import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
 import mobop.skicompass.dataarchitecture.WeatherData;
 
 public class DatabaseFill {
 
+	private static Random random = new Random();
 	private static int[] resortsIDs = {
 			// 383 Graub�nden
 			1012, 1017, 4398, /* 4396, */ 4395, 1018, 3801, 1009, 1014, 1016, 1011, 4397, 3712, 3728, 4981, 5029, 4050,
@@ -41,10 +44,10 @@ public class DatabaseFill {
 	public static void main(String[] args) throws Exception {
 		// Initialize Firebase Database Connection
 		File dir = new File(".");
-		File admin_sdk_key_file = dir.listFiles((directory, name) -> name.startsWith("ski-compass-firebase-adminsdk") && name.endsWith(".json"))[0];
+		File admin_sdk_key_file = dir.listFiles(
+				(directory, name) -> name.startsWith("ski-compass-firebase-adminsdk") && name.endsWith(".json"))[0];
 		FileInputStream serviceAccount = new FileInputStream(admin_sdk_key_file.getAbsolutePath());
-		FirebaseOptions options = new FirebaseOptions.Builder()
-				.setServiceAccount(serviceAccount)
+		FirebaseOptions options = new FirebaseOptions.Builder().setServiceAccount(serviceAccount)
 				.setDatabaseUrl("https://ski-compass.firebaseio.com").build();
 		FirebaseApp.initializeApp(options);
 		FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -67,7 +70,7 @@ public class DatabaseFill {
 
 			// Set Location on GeoFire
 			geoFire.setLocation(Integer.toString(id), new GeoLocation(latitude, longitude));
-			
+
 			SkiResort skiResort = gson.fromJson(jsonResponse.toString(), SkiResort.class);
 
 			// get weather data
@@ -76,23 +79,42 @@ public class DatabaseFill {
 			String weatherJson = jsonResponse.toString();
 			skiResort.setWeatherData(gson.fromJson(weatherJson, WeatherData.class));
 
+			generateRandomSkiResortData(skiResort);
+
 			// Put resort data to firebase database
-			skiResorts.child(Integer.toString(id)).setValue(skiResort, new CompletionListener() {
-				
-				@Override
-				public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-					System.out.println("Transver Completed!");
-				}
-			});
+			skiResorts.child(Integer.toString(id)).setValue(skiResort);
 
 			// save one json to file for testing
-			if (id == 1012) {
-				System.out.println("ID: " + skiResort.getId());
-				System.out.println("NAME: " + skiResort.getName());
-				System.out.println("LAT: " + skiResort.getLatitude());
-				System.out.println("TEMP: " + skiResort.getWeatherData().getMain().getTemp());
-			}
+			System.out.println("ID: " + skiResort.getId());
 		}
 
+	}
+
+	private static void generateRandomSkiResortData(SkiResort skiResort) {
+		switch (random.nextInt(2)) {
+		case 0:
+			skiResort.setOperatingStatus(OperatingStatus.Operating);
+			break;
+		case 1:
+			skiResort.setOperatingStatus(OperatingStatus.Closed);
+			break;
+		}
+
+		skiResort.setTotalLifts(random.nextInt(20));
+		skiResort.setTotalSlops(Math.round(random.nextDouble() * 1500) / 10);
+
+		if (skiResort.getOperatingStatus() == OperatingStatus.Operating) {
+			skiResort.setOpenedLifts((int) (skiResort.getOpenedLifts() * random.nextDouble()));
+			skiResort.setOpenedSlops(Math.round(skiResort.getTotalSlops() * random.nextDouble() * 10) / 10);
+		}
+
+		// test for malfunction
+		if (skiResort.getOpenedLifts() > skiResort.getTotalLifts()) {
+			throw new RuntimeException("More lifts opened then total lifts!!");
+		}
+
+		if (skiResort.getOpenedSlops() > skiResort.getTotalSlops()) {
+			throw new RuntimeException("More opened slopes then total slopes!!!");
+		}
 	}
 }
