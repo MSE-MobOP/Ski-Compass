@@ -97,7 +97,6 @@
             android:onClick="createMapIntent" />
 
         <Button
-            android:id="@+id/detailWebButton2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -108,8 +107,6 @@
 
     </LinearLayout>
 
-
-<!--
     <TextView
         android:id="@+id/detailText"
         android:layout_width="match_parent"
@@ -145,6 +142,5 @@
             android:onClick="createWebIntent" />
 
     </GridLayout>
-    -->
 
 </LinearLayout>

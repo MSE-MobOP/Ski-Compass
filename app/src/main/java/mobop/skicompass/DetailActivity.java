@@ -90,7 +90,7 @@ public class DetailActivity extends AppCompatActivity {
             imgButton.setEnabled(false);
             imgButton.setBackgroundResource(R.mipmap.detail_web_deactivated);
 
-            Button imgButton2 = (Button) findViewById(R.id.detailWebButton2);
+            Button imgButton2 = (Button) findViewById(R.id.detailWebButton);
             imgButton2.setEnabled(false);
         }
     }
