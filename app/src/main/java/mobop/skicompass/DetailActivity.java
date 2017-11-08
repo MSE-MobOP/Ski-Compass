@@ -44,13 +44,13 @@ public class DetailActivity extends AppCompatActivity {
         setWeatherIcon();
         setStatusIcon();
 
-        TextView detailText = (TextView) findViewById(R.id.detailText);
+        // TextView detailText = (TextView) findViewById(R.id.detailText);
 
-        detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
-        detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
+        // detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
+        // detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
 
-        detailText.append(getResources().getText(R.string.detailWeather) + ": " +  System.lineSeparator());//getResources().getText(test) +
-        detailText.append("ID: " + selectedResort.getId()); // debug only
+        // detailText.append(getResources().getText(R.string.detailWeather) + ": " +  System.lineSeparator());//getResources().getText(test) +
+        // detailText.append("ID: " + selectedResort.getId()); // debug only
 
     }
 

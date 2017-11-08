@@ -107,6 +107,7 @@
 
     </LinearLayout>
 
+    <!--
     <TextView
         android:id="@+id/detailText"
         android:layout_width="match_parent"
@@ -114,7 +115,7 @@
         android:paddingVertical="4dp"
         android:text="@string/example_text" />
 
-    <!--
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

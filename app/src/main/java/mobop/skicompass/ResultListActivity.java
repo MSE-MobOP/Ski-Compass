@@ -41,7 +41,7 @@ public class ResultListActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Toast.makeText(getApplicationContext(), "Position :" + position, Toast.LENGTH_LONG).show();
+        // Toast.makeText(getApplicationContext(), "Position :" + position, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("selectedItem", skiResortList.get(position));
         startActivity(intent);
