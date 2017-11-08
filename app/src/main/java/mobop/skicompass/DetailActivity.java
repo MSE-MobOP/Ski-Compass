@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
 
 /**
@@ -37,9 +38,9 @@ public class DetailActivity extends AppCompatActivity {
         TextView weatherDescription = (TextView)findViewById(R.id.WeatherDescription);
         weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescription());
 
-
         checkWebButton();
         setWeatherIcon();
+        setStatusIcon();
 
         TextView detailText = (TextView) findViewById(R.id.detailText);
 
@@ -56,21 +57,41 @@ public class DetailActivity extends AppCompatActivity {
         if (weatherIconName.isEmpty() || weatherIconName.equals(""))
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeatherIcon), Toast.LENGTH_LONG).show();
         ImageView weatherView = (ImageView) findViewById(R.id.detailWeatherImage);
-        Picasso picasso = new Picasso.Builder(getApplicationContext()).listener(new Picasso.Listener() {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception e) {
-                e.printStackTrace();
-            }
-        }).build();
-        picasso.setLoggingEnabled(true);
-        picasso.load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
+        //Picasso picasso = new Picasso.Builder(getApplicationContext()).listener(new Picasso.Listener() {
+        //   @Override
+        //    public void onImageLoadFailed(Picasso picasso, Uri uri, Exception e) {
+        //        e.printStackTrace();
+        //    }
+        //}).build();
+        //picasso.setLoggingEnabled(true);
+        Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
+    }
+
+    private void setStatusIcon() {
+        OperatingStatus status = selectedResort.getOperatingStatus();
+        ImageView statusImage = (ImageView) findViewById(R.id.detailStatusImage);
+        switch(status) {
+            case Operating:
+                statusImage.setImageResource(R.drawable.open);
+                break;
+            case Closed:
+                statusImage.setImageResource(R.drawable.closed);
+                break;
+            default:
+                statusImage.setImageResource(R.drawable.unknown);
+                break;
+        }
+
     }
 
     private void checkWebButton() {
         if (selectedResort.getOfficialWebsite() == null) {
             ImageButton imgButton = (ImageButton) findViewById(R.id.detailWebButton);
             imgButton.setEnabled(false);
-            imgButton.setBackground(getResources().getDrawable(R.mipmap.detail_web_deactivated));
+            imgButton.setBackgroundResource(R.mipmap.detail_web_deactivated);
+
+            Button imgButton2 = (Button) findViewById(R.id.detailWebButton2);
+            imgButton2.setEnabled(false);
         }
     }
 

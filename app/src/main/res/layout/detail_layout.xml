@@ -88,6 +88,7 @@
         android:onClick="createMapIntent" />
 
     <Button
+        android:id="@+id/detailWebButton2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/detailNavButtonName"
