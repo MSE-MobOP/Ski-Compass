@@ -18,6 +18,7 @@ import com.mashape.unirest.http.Unirest;
 
 import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
+import mobop.skicompass.dataarchitecture.Weather;
 import mobop.skicompass.dataarchitecture.WeatherData;
 
 public class DatabaseFill {
@@ -75,10 +76,22 @@ public class DatabaseFill {
 
 			// get weather data
 			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
-					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6").asJson().getBody();
-			String weatherJson = jsonResponse.toString();
-			skiResort.setWeatherData(gson.fromJson(weatherJson, WeatherData.class));
-
+					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=en").asJson().getBody();
+			WeatherData weather = gson.fromJson(jsonResponse.toString(), WeatherData.class);
+			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
+					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=fr").asJson().getBody();
+			WeatherData frenchWeather = gson.fromJson(jsonResponse.toString(), WeatherData.class);
+			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
+					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=de").asJson().getBody();
+			WeatherData germanWeather = gson.fromJson(jsonResponse.toString(), WeatherData.class);
+			
+			Weather w = weather.getWeather().get(0);
+			w.setDescriptionDE(germanWeather.getWeather().get(0).getDescription());
+			w.setDescriptionFR(frenchWeather.getWeather().get(0).getDescription());
+			
+			skiResort.setWeatherData(weather);
+			
+			
 			generateRandomSkiResortData(skiResort);
 
 			// Put resort data to firebase database

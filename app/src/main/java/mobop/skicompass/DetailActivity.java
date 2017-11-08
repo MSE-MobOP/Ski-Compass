@@ -1,6 +1,7 @@
 package mobop.skicompass;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
 
 import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
@@ -35,8 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
         setTitle(selectedResort.getName());
-        TextView weatherDescription = (TextView)findViewById(R.id.WeatherDescription);
-        weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescription());
+        setWeatherDescription();
 
         checkWebButton();
         setWeatherIcon();
@@ -52,19 +54,28 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    private void setWeatherDescription() {
+        TextView weatherDescription = (TextView)findViewById(R.id.WeatherDescription);
+        switch (Locale.getDefault().getLanguage()){
+            case "de":
+                weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescriptionDE());
+                break;
+            case "fr":
+                weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescriptionFR());
+                break;
+            default:
+                weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescription());
+        }
+    }
+
     private void setWeatherIcon() {
         String weatherIconName = selectedResort.getWeatherData().getWeather().get(0).getIcon();
         if (weatherIconName.isEmpty() || weatherIconName.equals(""))
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeatherIcon), Toast.LENGTH_LONG).show();
         ImageView weatherView = (ImageView) findViewById(R.id.detailWeatherImage);
-        //Picasso picasso = new Picasso.Builder(getApplicationContext()).listener(new Picasso.Listener() {
-        //   @Override
-        //    public void onImageLoadFailed(Picasso picasso, Uri uri, Exception e) {
-        //        e.printStackTrace();
-        //    }
-        //}).build();
-        //picasso.setLoggingEnabled(true);
-        Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
+        int id = getResources().getIdentifier("weather_" + weatherIconName,"drawable",getPackageName());
+        weatherView.setImageResource(id);
+        //Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
     private void setStatusIcon() {

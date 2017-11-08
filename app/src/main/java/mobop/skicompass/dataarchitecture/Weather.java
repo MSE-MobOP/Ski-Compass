@@ -12,16 +12,20 @@ import java.io.Serializable;
 public class Weather implements Serializable{
     
 	@SerializedName("icon")
-    public String icon;
+    private String icon;
 	
 	@SerializedName("description")
-    public String description;
+    private String description;
+	
+	private String descriptionDE;
+	
+	private String descriptionFR;
 	
 	@SerializedName("main")
-    public String main;
+    private String main;
 	
 	@SerializedName("id")
-    public int id;
+    private int id;
 
     public int getId() {
         return id;
@@ -34,6 +38,26 @@ public class Weather implements Serializable{
     public String getDescription() {
         return description;
     }
+    
+    public void setDescription(String description) {
+		this.description = description;
+	}
+    
+    public String getDescriptionDE() {
+		return descriptionDE;
+	}
+    
+    public void setDescriptionDE(String descriptionDE) {
+		this.descriptionDE = descriptionDE;
+	}
+    
+    public String getDescriptionFR() {
+		return descriptionFR;
+	}
+    
+    public void setDescriptionFR(String descriptionFR) {
+		this.descriptionFR = descriptionFR;
+	}
 
     public String getMain() {
         return main;
