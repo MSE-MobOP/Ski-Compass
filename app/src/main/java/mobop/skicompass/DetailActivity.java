@@ -97,12 +97,15 @@ public class DetailActivity extends AppCompatActivity {
 
     private void checkWebButton() {
         if (selectedResort.getOfficialWebsite() == null) {
-            ImageButton imgButton = (ImageButton) findViewById(R.id.detailWebButton);
-            imgButton.setEnabled(false);
-            imgButton.setBackgroundResource(R.mipmap.detail_web_deactivated);
+            // ImageButton imgButton = (ImageButton) findViewById(R.id.detailWebButton);
+            // imgButton.setEnabled(false);
+            // imgButton.setBackgroundResource(R.mipmap.detail_web_deactivated);
 
-            Button imgButton2 = (Button) findViewById(R.id.detailWebButton);
-            imgButton2.setEnabled(false);
+            // Button imgButton2 = (Button) findViewById(R.id.detailWebButton);
+            // imgButton2.setEnabled(false);
+
+            Button webButton = (Button) findViewById(R.id.detailWebButton);
+            webButton.setEnabled(false);
         }
     }
 
