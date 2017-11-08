@@ -81,19 +81,35 @@
 
     </RelativeLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/detailWebButtonName"
-        android:onClick="createMapIntent" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/detailWebButton2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/detailNavButtonName"
-        android:onClick="createWebIntent" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:text="@string/detailWebButtonName"
+            android:background="@drawable/rounded_button"
+            android:textColor="#FFFFFF"
+            android:onClick="createMapIntent" />
 
+        <Button
+            android:id="@+id/detailWebButton2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/detailNavButtonName"
+            android:background="@drawable/rounded_button"
+            android:textColor="#FFFFFF"
+            android:onClick="createWebIntent" />
+
+    </LinearLayout>
+
+
+<!--
     <TextView
         android:id="@+id/detailText"
         android:layout_width="match_parent"
@@ -129,5 +145,6 @@
             android:onClick="createWebIntent" />
 
     </GridLayout>
+    -->
 
 </LinearLayout>

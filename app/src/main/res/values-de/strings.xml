@@ -12,12 +12,12 @@
     <string name="detailWeatherDefault">Standard</string>
     <string name="detailStatus">Status</string>
     <string name="detailStatusDefault">Unbekannt</string>
-    <string name="detailNavButtonName">In Google Maps öffnen</string>
+    <string name="detailNavButtonName">Navigieren</string>
     <string name="detailErrorNav">Google Maps nicht installiert!</string>
 
     <string name="broken_clouds">Bewölkt</string>
     <string name="snow">Schneefall</string>
-    <string name="detailWebButtonName">Website anzeigen</string>
+    <string name="detailWebButtonName">Webseite</string>
     <string name="detailErrorWeb">Kein Webbrowser installiert!</string>
     <string name="detailErrorWeatherIcon">Konnte Wetter Icon nicht finden</string>
 </resources>
