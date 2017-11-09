@@ -27,16 +27,14 @@ public class DetailArrayAdapter extends ArrayAdapter<DetailRowData> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         View rowView = convertView;
+
         if (convertView == null) {
-            // no convertView available for reuse
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = vi.inflate(R.layout.detail_rowlayout, parent, false);
         }
 
         if (rowData[position] != null){
-
             TextView listDescription = (TextView) rowView.findViewById(R.id.listDescription);
             TextView listValue = (TextView) rowView.findViewById(R.id.listValue);
 
@@ -47,11 +45,9 @@ public class DetailArrayAdapter extends ArrayAdapter<DetailRowData> {
             if (listValue != null) {
                 listValue.setText(rowData[position].value);
             }
-
         }
 
         return rowView;
-
     }
 
 }
