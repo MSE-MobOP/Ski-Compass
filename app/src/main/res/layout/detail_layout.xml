@@ -19,67 +19,39 @@
         android:src="@drawable/mountain" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/detailWeatherSubheading"
-            android:text="@string/detailWeather"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            android:textSize="16sp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp">
 
         <ImageView
             android:id="@+id/detailWeatherImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/detailWeatherSubheading"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             app:srcCompat="@drawable/app" />
 
         <TextView
-            android:id="@+id/WeatherDescription"
+            android:id="@+id/WeatherTemperature"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/detailWeatherSubheading"
+            android:layout_height="100dp"
             android:layout_toRightOf="@id/detailWeatherImage"
             android:layout_alignParentRight="true"
-            android:paddingHorizontal="8dp"
-            android:gravity="center_vertical"
-            android:textSize="14sp"
-            android:text="@string/detailWeatherDefault"/>
-
-        <TextView
-            android:id="@+id/detailStatusSubheading"
-            android:text="@string/detailStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/detailWeatherImage"
-            android:textAllCaps="true"
-            android:textSize="16sp"/>
-
-        <ImageView
-            android:id="@+id/detailStatusImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/detailStatusSubheading"
-            android:layout_alignParentLeft="true"
-            app:srcCompat="@drawable/open" />
-
-        <TextView
-            android:id="@+id/StatusDescription"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:paddingHorizontal="8dp"
-            android:gravity="center_vertical"
-            android:layout_below="@id/detailStatusSubheading"
-            android:layout_toRightOf="@id/detailStatusImage"
-            android:layout_alignParentRight="true"
-            android:textSize="14sp"
-            android:text="@string/detailStatusDefault"/>
+            android:textAlignment="textEnd"
+            android:textSize="70sp"
+            android:textColor="@color/black"
+            android:text="20°"/>
 
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/detailList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
+
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,14 +80,6 @@
     </LinearLayout>
 
     <!--
-    <TextView
-        android:id="@+id/detailText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="4dp"
-        android:text="@string/example_text" />
-
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
