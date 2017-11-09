@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/listDescription"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:paddingLeft="8dp"
         android:gravity="center_vertical"
@@ -16,12 +16,11 @@
     <TextView
         android:id="@+id/listValue"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:paddingRight="8dp"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:text="@string/detailWeatherDefault"
-        />
+        android:text="@string/detailWeatherDefault" />
 
 </LinearLayout>
