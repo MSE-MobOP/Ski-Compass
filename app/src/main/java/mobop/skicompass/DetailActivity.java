@@ -46,14 +46,15 @@ public class DetailActivity extends AppCompatActivity {
         rowData = new DetailRowData[numRows];
 
         setTitle(selectedResort.getName());
-        setWeatherDescription();
 
-        checkWebButton();
         setWeatherIcon();
+        setWeatherDescription();
         setStatusDescription();
 
         DetailArrayAdapter detailArrayAdapter = new DetailArrayAdapter(this, rowData);
         detailList.setAdapter(detailArrayAdapter);
+
+        checkWebButton();
     }
 
     private void setWeatherDescription() {
@@ -70,7 +71,7 @@ public class DetailActivity extends AppCompatActivity {
                 weatherDescriptionText = selectedResort.getWeatherData().getWeather().get(0).getDescription();
         }
 
-        // fill detail list
+        // fill detailList
         rowData[0] = new DetailRowData(getResources().getString(R.string.detailWeather), weatherDescriptionText);
     }
 
@@ -81,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
         ImageView weatherView = (ImageView) findViewById(R.id.detailWeatherImage);
         int id = getResources().getIdentifier("weather_" + weatherIconName,"drawable",getPackageName());
         weatherView.setImageResource(id);
-        //Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
+        // Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
     private void setStatusDescription() {
@@ -100,7 +101,7 @@ public class DetailActivity extends AppCompatActivity {
                 break;
         }
 
-        // fill detail list
+        // fill detailList
         rowData[1] = new DetailRowData(getResources().getString(R.string.detailStatus), statusDescription);
     }
 
@@ -128,7 +129,6 @@ public class DetailActivity extends AppCompatActivity {
         Uri mapsIntentUri = Uri.parse("geo:" + latLong + "?z=10&q=" + latLong + "(" + selectedResort.getName() + ")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
-
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(mapIntent);
         } else {
