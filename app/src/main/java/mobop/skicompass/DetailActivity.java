@@ -42,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
         selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
         detailList = (ListView) findViewById(R.id.detailList);
-        // detailList.setOnClickListener(null); // make list unclickable, causes crash
+        detailList.setEnabled(false);
         rowData = new DetailRowData[numRows];
 
         setTitle(selectedResort.getName());
@@ -106,13 +106,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void checkWebButton() {
         if (selectedResort.getOfficialWebsite() == null) {
-            // ImageButton imgButton = (ImageButton) findViewById(R.id.detailWebButton);
-            // imgButton.setEnabled(false);
-            // imgButton.setBackgroundResource(R.mipmap.detail_web_deactivated);
-
-            // Button imgButton2 = (Button) findViewById(R.id.detailWebButton);
-            // imgButton2.setEnabled(false);
-
             Button webButton = (Button) findViewById(R.id.detailWebButton);
             webButton.setEnabled(false);
         }

@@ -22,12 +22,24 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="16dp">
+        android:paddingVertical="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/CurrentConditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:text="Current Conditions" />
 
         <ImageView
             android:id="@+id/detailWeatherImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_below="@id/CurrentConditions"
             android:layout_alignParentLeft="true"
             app:srcCompat="@drawable/app" />
 
@@ -35,10 +47,11 @@
             android:id="@+id/WeatherTemperature"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_below="@id/CurrentConditions"
             android:layout_toRightOf="@id/detailWeatherImage"
             android:layout_alignParentRight="true"
             android:textAlignment="textEnd"
-            android:textSize="70sp"
+            android:textSize="56sp"
             android:textColor="@color/black"
             android:text="20°"/>
 
@@ -78,36 +91,5 @@
             android:onClick="createMapIntent" />
 
     </LinearLayout>
-
-    <!--
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:columnCount="2"
-        android:rowCount="1">
-
-        <ImageButton
-            android:id="@+id/detailNavButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="left|top"
-            android:layout_marginLeft="70dp"
-            android:background="@mipmap/detail_nav"
-            android:scaleType="fitXY"
-            android:onClick="createMapIntent" />
-
-        <ImageButton
-            android:id="@+id/detailWebButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="right|top"
-            android:layout_marginRight="70dp"
-            android:background="@mipmap/detail_web"
-            android:scaleType="fitXY"
-            android:onClick="createWebIntent" />
-
-    </GridLayout>
-    -->
 
 </LinearLayout>
