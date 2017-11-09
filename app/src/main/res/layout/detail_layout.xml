@@ -37,8 +37,8 @@
 
         <ImageView
             android:id="@+id/detailWeatherImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_below="@id/CurrentConditions"
             android:layout_alignParentLeft="true"
             app:srcCompat="@drawable/app" />
@@ -46,11 +46,12 @@
         <TextView
             android:id="@+id/WeatherTemperature"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:layout_below="@id/CurrentConditions"
             android:layout_toRightOf="@id/detailWeatherImage"
             android:layout_alignParentRight="true"
             android:textAlignment="textEnd"
+            android:gravity="bottom"
             android:textSize="56sp"
             android:textColor="@color/black"
             android:text="23°"/>
