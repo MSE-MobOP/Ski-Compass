@@ -7,13 +7,30 @@
     android:paddingRight="16dp"
     android:paddingTop="8dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find ski-resort around your current Destination"
+        android:gravity="center"
+        />
+    
     <Button
         android:id="@+id/listDistanceButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:onClick="listByDistance"
+        android:theme="@style/AppTheme.Button"
         android:text="List by Distance"/>
+
+    <Button
+        android:id="@+id/listOperatingStatusButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="listByOperatingStatus"
+        android:theme="@style/AppTheme.Button"
+        android:text="List by Operating Status"/>
 
     <Button
         android:id="@+id/listWeatherButton"
@@ -21,6 +38,25 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:onClick="listByWeather"
+        android:theme="@style/AppTheme.Button"
         android:text="List by Weather"/>
+
+    <Button
+        android:id="@+id/listLiftsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="listByOpenedLIfts"
+        android:theme="@style/AppTheme.Button"
+        android:text="List by Opened Lifts"/>
+
+    <Button
+        android:id="@+id/listSlopsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="listByOpenedSlops"
+        android:theme="@style/AppTheme.Button"
+        android:text="List by Opened Slops"/>
 
 </LinearLayout>
