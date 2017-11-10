@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ski-Compass</string>
-    <string name="nodata">Pas de données</string>
+    <string name="noData">Pas de données</string>
     <string name="detail_image_alt">Illustration de la station de ski</string>
     <string name="example_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</string>
     <string name="title_activity_detail">Details</string>
     <string name="weather">Temps</string>
-
     <string name="detailName">Nom</string>
     <string name="detailOperatingStatus">Statut</string>
     <string name="detailWeather">Temps</string>
     <string name="detailWeatherDefault">Défaut</string>
     <string name="detailStatus">Statut</string>
-    <string name="detailStatusDefault">Inconnu</string>
     <string name="detailNavButtonName">Naviguer</string>
     <string name="detailErrorNav">Google Maps non installé!</string>
     <string name="detailWebButtonName">Site Internet</string>
     <string name="detailErrorWeb">Aucun navigateur installé</string>
     <string name="detailErrorWeatherIcon">Ne trouve pas l\'icône de la météo</string>
+    <string name="detailCurrentConditions">Conditions actuelles</string>
+    <string name="detailStatusOpen">ouvert</string>
+    <string name="detailStatusClosed">fermé</string>
+    <string name="detailStatusUnknown">Inconnu</string>
 
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">

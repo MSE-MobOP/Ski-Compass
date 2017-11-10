@@ -92,13 +92,13 @@ public class DetailActivity extends AppCompatActivity {
 
         switch (status) {
             case Operating:
-                statusDescription = "open"; // todo: use DE EN and FR with stings.xml
+                statusDescription = getResources().getString(R.string.detailStatusOpen);
                 break;
             case Closed:
-                statusDescription = "closed";
+                statusDescription = getResources().getString(R.string.detailStatusClosed);
                 break;
             default:
-                statusDescription = "unknown";
+                statusDescription = getResources().getString(R.string.detailStatusUnknown);
                 break;
         }
 

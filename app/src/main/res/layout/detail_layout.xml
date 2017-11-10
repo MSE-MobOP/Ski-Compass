@@ -35,7 +35,7 @@
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
             android:textSize="24sp"
-            android:text="Current Conditions" />
+            android:text="@string/detailCurrentConditions" />
 
         <ImageView
             android:id="@+id/weatherImageView"
@@ -53,7 +53,7 @@
             android:layout_toEndOf="@id/weatherImageView"
             android:layout_alignParentEnd="true"
             android:textAlignment="textEnd"
-            android:gravity="bottom"
+            android:gravity="bottom|end"
             android:textSize="56sp"
             android:textColor="@color/black"
             android:text="23°"/>
