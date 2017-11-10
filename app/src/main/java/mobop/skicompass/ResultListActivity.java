@@ -18,6 +18,7 @@ import mobop.skicompass.dataarchitecture.SkiResort;
  * Created by artanpapaj on 25.10.17.
  */
 
+@java.lang.SuppressWarnings("squid:MaximumInheritanceDepth") // AppCompatActivity has already too much parents... Would be kind of a lot work to make it better
 public class ResultListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     private ListView listView;
@@ -47,7 +48,9 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
 
         toolbar = (Toolbar) findViewById(R.id.listActivityToolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         setupSpinner(sortPriority);
     }
 

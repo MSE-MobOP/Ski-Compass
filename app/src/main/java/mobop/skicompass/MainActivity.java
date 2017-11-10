@@ -13,9 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+@java.lang.SuppressWarnings("squid:MaximumInheritanceDepth") // AppCompatActivity has already too much parents... Would be kind of a lot work to make it better
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+    private static final String WRONG_BUTTON = "Wrong binding of Button";
 
     private Location location;
     LocationManager locationManager;
@@ -63,22 +65,37 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     public void listByDistance(View v) {
+        if (v.getId() != R.id.listDistanceButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         list(SortPriority.LOCATION);
     }
 
     public void listByWeather(View v) {
+        if (v.getId() != R.id.listWeatherButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         list(SortPriority.WEATHER);
     }
 
     public void listByOperatingStatus(View v) {
+        if (v.getId() != R.id.listOperatingStatusButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         list(SortPriority.OPERATING);
     }
 
-    public void listByOpenedLIfts(View v){
+    public void listByOpenedLifts(View v){
+        if (v.getId() != R.id.listLiftsButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         list(SortPriority.OPENED_LIFTS);
     }
 
     public void listByOpenedSlops(View v){
+        if (v.getId() != R.id.listSlopsButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         list(SortPriority.OPENED_SLOPS);
     }
 

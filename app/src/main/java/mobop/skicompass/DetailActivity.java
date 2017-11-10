@@ -1,38 +1,30 @@
 package mobop.skicompass;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
-
 import java.util.Locale;
-
 import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
 
 /**
  * Created by artanpapaj on 26.10.17.
  */
-
+@java.lang.SuppressWarnings("squid:MaximumInheritanceDepth") // AppCompatActivity has already too much parents... Would be kind of a lot work to make it better
 public class DetailActivity extends AppCompatActivity {
 
     private SkiResort selectedResort;
-    private ListView detailList;
     private DetailRowData[] rowData;
-    private final int numRows = 2;
+    private static final int NUM_ROWS = 2;
+    private static final String WRONG_BUTTON = "Wrong binding of Button";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,9 +33,9 @@ public class DetailActivity extends AppCompatActivity {
 
         selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
-        detailList = (ListView) findViewById(R.id.detailList);
+        ListView detailList = (ListView) findViewById(R.id.detailList);
         detailList.setEnabled(false);
-        rowData = new DetailRowData[numRows];
+        rowData = new DetailRowData[NUM_ROWS];
 
         setTitle(selectedResort.getName());
 
@@ -102,13 +94,12 @@ public class DetailActivity extends AppCompatActivity {
      */
     private void setWeatherIcon() {
         String weatherIconName = selectedResort.getWeatherData().getWeather().get(0).getIcon();
-        if (weatherIconName.isEmpty() || weatherIconName.equals("")) {
+        if (weatherIconName == null || weatherIconName.isEmpty()) {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeatherIcon), Toast.LENGTH_LONG).show();
         }
         ImageView weatherImageView = (ImageView) findViewById(R.id.weatherImageView);
         int id = getResources().getIdentifier("weather_" + weatherIconName,"drawable", getPackageName());
         weatherImageView.setImageResource(id);
-        // Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
     /**
@@ -149,6 +140,9 @@ public class DetailActivity extends AppCompatActivity {
      * @param v
      */
     public void createWebIntent(View v) {
+        if (v.getId() != R.id.detailWebButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         if (selectedResort.getOfficialWebsite() != null) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW);
             webIntent.setData(Uri.parse(selectedResort.getOfficialWebsite()));
@@ -165,6 +159,9 @@ public class DetailActivity extends AppCompatActivity {
      * @param v
      */
     public void createMapIntent(View v) {
+        if (v.getId() != R.id.detailNavButton) {
+            throw new IllegalArgumentException(WRONG_BUTTON);
+        }
         String latLong = selectedResort.getLatitude() + "," + selectedResort.getLongitude();
         Uri mapsIntentUri = Uri.parse("geo:" + latLong + "?z=10&q=" + latLong + "(" + selectedResort.getName() + ")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);

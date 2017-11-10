@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by Martin on 04.11.2017.
- * Christian: Cant be uppercase -> gson serialization failure, even with annotation @SerializedName
  */
+@java.lang.SuppressWarnings("squid:S00115") // This enum cant be uppercase, because @SerializedName doesn't work -> error at deserialize
 public enum OperatingStatus implements Serializable{
     Operating(1),
     Unknown(2),
