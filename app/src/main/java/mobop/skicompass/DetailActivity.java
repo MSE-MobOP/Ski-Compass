@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 public class DetailActivity extends AppCompatActivity {
 
     private SkiResort selectedResort;
+    private ListView detailList;
+    private DetailRowData[] rowData;
+    private final int numRows = 2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,35 +41,38 @@ public class DetailActivity extends AppCompatActivity {
 
         selectedResort = (SkiResort) getIntent().getSerializableExtra("selectedItem");
 
+        detailList = (ListView) findViewById(R.id.detailList);
+        detailList.setEnabled(false);
+        rowData = new DetailRowData[numRows];
+
         setTitle(selectedResort.getName());
+
+        setWeatherIcon();
         setWeatherDescription();
+        setStatusDescription();
+
+        DetailArrayAdapter detailArrayAdapter = new DetailArrayAdapter(this, rowData);
+        detailList.setAdapter(detailArrayAdapter);
 
         checkWebButton();
-        setWeatherIcon();
-        setStatusIcon();
-
-        // TextView detailText = (TextView) findViewById(R.id.detailText);
-
-        // detailText.setText(getResources().getText(R.string.detailName) + ": " + selectedResort.getName() + System.lineSeparator());
-        // detailText.append(getResources().getText(R.string.detailOperatingStatus) + ": " + selectedResort.getOperatingStatus() + System.lineSeparator());
-
-        // detailText.append(getResources().getText(R.string.detailWeather) + ": " +  System.lineSeparator());//getResources().getText(test) +
-        // detailText.append("ID: " + selectedResort.getId()); // debug only
-
     }
 
     private void setWeatherDescription() {
-        TextView weatherDescription = (TextView)findViewById(R.id.WeatherDescription);
+        String weatherDescriptionText;
+
         switch (Locale.getDefault().getLanguage()){
             case "de":
-                weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescriptionDE());
+                weatherDescriptionText = selectedResort.getWeatherData().getWeather().get(0).getDescriptionDE();
                 break;
             case "fr":
-                weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescriptionFR());
+                weatherDescriptionText = selectedResort.getWeatherData().getWeather().get(0).getDescriptionFR();
                 break;
             default:
-                weatherDescription.setText(selectedResort.getWeatherData().getWeather().get(0).getDescription());
+                weatherDescriptionText = selectedResort.getWeatherData().getWeather().get(0).getDescription();
         }
+
+        // fill detailList
+        rowData[0] = new DetailRowData(getResources().getString(R.string.detailWeather), weatherDescriptionText);
     }
 
     private void setWeatherIcon() {
@@ -75,35 +82,31 @@ public class DetailActivity extends AppCompatActivity {
         ImageView weatherView = (ImageView) findViewById(R.id.detailWeatherImage);
         int id = getResources().getIdentifier("weather_" + weatherIconName,"drawable",getPackageName());
         weatherView.setImageResource(id);
-        //Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
+        // Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
-    private void setStatusIcon() {
+    private void setStatusDescription() {
         OperatingStatus status = selectedResort.getOperatingStatus();
-        ImageView statusImage = (ImageView) findViewById(R.id.detailStatusImage);
-        switch(status) {
+        String statusDescription;
+
+        switch (status) {
             case Operating:
-                statusImage.setImageResource(R.drawable.open);
+                statusDescription = "open"; // todo: use DE EN and FR with stings.xml
                 break;
             case Closed:
-                statusImage.setImageResource(R.drawable.closed);
+                statusDescription = "closed";
                 break;
             default:
-                statusImage.setImageResource(R.drawable.unknown);
+                statusDescription = "unknown";
                 break;
         }
 
+        // fill detailList
+        rowData[1] = new DetailRowData(getResources().getString(R.string.detailStatus), statusDescription);
     }
 
     private void checkWebButton() {
         if (selectedResort.getOfficialWebsite() == null) {
-            // ImageButton imgButton = (ImageButton) findViewById(R.id.detailWebButton);
-            // imgButton.setEnabled(false);
-            // imgButton.setBackgroundResource(R.mipmap.detail_web_deactivated);
-
-            // Button imgButton2 = (Button) findViewById(R.id.detailWebButton);
-            // imgButton2.setEnabled(false);
-
             Button webButton = (Button) findViewById(R.id.detailWebButton);
             webButton.setEnabled(false);
         }
@@ -126,7 +129,6 @@ public class DetailActivity extends AppCompatActivity {
         Uri mapsIntentUri = Uri.parse("geo:" + latLong + "?z=10&q=" + latLong + "(" + selectedResort.getName() + ")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
-
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(mapIntent);
         } else {
