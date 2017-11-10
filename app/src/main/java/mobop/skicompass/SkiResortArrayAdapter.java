@@ -28,7 +28,11 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
 
     @Override
     public void notifyDataSetChanged() {
-        ((ResultListActivity) context).disableLoadingSymbol();
+        if (!skiResortList.isEmpty()) {
+            ((ResultListActivity) context).disableLoadingSymbol();
+        } else {
+            ((ResultListActivity) context).enableLoadingSymbol();
+        }
         super.notifyDataSetChanged();
     }
 

@@ -21,10 +21,7 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 @java.lang.SuppressWarnings("squid:MaximumInheritanceDepth") // AppCompatActivity has already too much parents... Would be kind of a lot work to make it better
 public class ResultListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
-    private ListView listView;
     private List<SkiResort> skiResortList;
-    private GeoLocation location;
-    private SortPriority sortPriority;
     private final SortPriority[] sortPriorityValues = SortPriority.values();
     private Toolbar toolbar;
 
@@ -37,14 +34,18 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
         }
         setContentView(R.layout.list_layout);
 
-        listView = (ListView) findViewById(R.id.list);
+        ListView listView = (ListView) findViewById(R.id.list);
         listView.setOnItemClickListener(this);
 
         Intent intent = getIntent();
         double latitude = intent.getDoubleExtra("Latitude", 0.0);
         double longitude = intent.getDoubleExtra("Longitude", 0.0);
-        sortPriority = (SortPriority)intent.getSerializableExtra("SortPriority");
-        location = new GeoLocation(latitude, longitude);
+        SortPriority sortPriority = (SortPriority)intent.getSerializableExtra("SortPriority");
+        GeoLocation location = new GeoLocation(latitude, longitude);
+
+        SkiResortArrayAdapter skiResortArrayAdapter = new SkiResortArrayAdapter(this, skiResortList);
+        listView.setAdapter(skiResortArrayAdapter);
+        SkiResortManager.getInstance().loadNearestResorts(location, skiResortArrayAdapter, sortPriority);
 
         toolbar = (Toolbar) findViewById(R.id.listActivityToolbar);
         setSupportActionBar(toolbar);
@@ -62,6 +63,13 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
     }
 
     /**
+     * This shows the loading symbol. Call if list to display is empty.
+     */
+    public void enableLoadingSymbol() {
+        findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+    }
+
+    /**
      * Sets the spinner to choose the sorting algorithm
      * @param defaultSortPriority
      */
@@ -72,19 +80,6 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
         spinner.setAdapter(adapter);
         spinner.setSelection(defaultSortPriority.getValue());
         spinner.setOnItemSelectedListener(this);
-    }
-
-    /**
-     * On activity resume (activity lifecycle)
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SkiResortArrayAdapter adapter = new SkiResortArrayAdapter(this, skiResortList);
-        listView.setAdapter(adapter);
-        if (adapter.getCount() == 0) {
-            SkiResortManager.getInstance().loadNearestResorts(location, adapter, sortPriority);
-        }
     }
 
     /**
