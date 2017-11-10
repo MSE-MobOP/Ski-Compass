@@ -1,6 +1,7 @@
 package mobop.skicompass;
 
 import android.content.Context;
+import android.database.CursorJoiner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,12 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
         super(context, R.layout.list_entry, objects);
         this.skiResortList = objects;
         this.context = context;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        ((ResultListActivity) context).disableLoadingSymbol();
+        super.notifyDataSetChanged();
     }
 
     @Override
