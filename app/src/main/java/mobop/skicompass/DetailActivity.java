@@ -77,11 +77,12 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setWeatherIcon() {
         String weatherIconName = selectedResort.getWeatherData().getWeather().get(0).getIcon();
-        if (weatherIconName.isEmpty() || weatherIconName.equals(""))
+        if (weatherIconName.isEmpty() || weatherIconName.equals("")) {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorWeatherIcon), Toast.LENGTH_LONG).show();
-        ImageView weatherView = (ImageView) findViewById(R.id.detailWeatherImage);
-        int id = getResources().getIdentifier("weather_" + weatherIconName,"drawable",getPackageName());
-        weatherView.setImageResource(id);
+        }
+        ImageView weatherImageView = (ImageView) findViewById(R.id.weatherImageView);
+        int id = getResources().getIdentifier("weather_" + weatherIconName,"drawable", getPackageName());
+        weatherImageView.setImageResource(id);
         // Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
