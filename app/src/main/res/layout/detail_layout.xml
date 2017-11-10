@@ -8,6 +8,7 @@
     android:paddingRight="16dp"
     android:weightSum="1">
 
+    <!--add scale-->
     <ImageView
         android:id="@+id/detailImageView"
         android:layout_width="match_parent"
@@ -18,39 +19,39 @@
         android:src="@drawable/mountain" />
 
     <RelativeLayout
-
-        android:id="@+id/conditions"
+        android:id="@+id/conditionsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/detailImageView"
-        android:paddingVertical="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/CurrentConditions"
+            android:id="@+id/conditionsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:text="Current Conditions" />
 
         <ImageView
-            android:id="@+id/detailWeatherImage"
+            android:id="@+id/weatherImageView"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_below="@id/CurrentConditions"
-            android:layout_alignParentLeft="true"
-            app:srcCompat="@drawable/app" />
+            android:layout_below="@id/conditionsTextView"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/weather_02d" />
 
         <TextView
-            android:id="@+id/WeatherTemperature"
+            android:id="@+id/temperatureTextView"
             android:layout_width="0dp"
             android:layout_height="120dp"
-            android:layout_below="@id/CurrentConditions"
-            android:layout_toRightOf="@id/detailWeatherImage"
-            android:layout_alignParentRight="true"
+            android:layout_below="@id/conditionsTextView"
+            android:layout_toEndOf="@id/weatherImageView"
+            android:layout_alignParentEnd="true"
             android:textAlignment="textEnd"
             android:gravity="bottom"
             android:textSize="56sp"
@@ -63,7 +64,7 @@
         android:id="@+id/detailList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/conditions"
+        android:layout_below="@id/conditionsLayout"
         android:focusable="false"
         android:focusableInTouchMode="false">
 
