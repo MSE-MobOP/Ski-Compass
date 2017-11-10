@@ -47,14 +47,19 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(selectedResort.getName());
 
-        setWeatherIcon();
-        setWeatherDescription();
+        setWeather();
         setStatusDescription();
 
         DetailArrayAdapter detailArrayAdapter = new DetailArrayAdapter(this, rowData);
         detailList.setAdapter(detailArrayAdapter);
 
         checkWebButton();
+    }
+
+    private void setWeather() {
+        setWeatherIcon();
+        setWeatherDescription();
+        setTemperature();
     }
 
     private void setWeatherDescription() {
@@ -73,6 +78,14 @@ public class DetailActivity extends AppCompatActivity {
 
         // fill detailList
         rowData[0] = new DetailRowData(getResources().getString(R.string.detailWeather), weatherDescriptionText);
+    }
+
+    private void setTemperature() {
+        TextView textView = (TextView) findViewById(R.id.temperatureTextView);
+        double tempAbs = selectedResort.getWeatherData().getMain().getTemp();
+        double temp = tempAbs - 273.0;
+        int tempInt = (int) temp;
+        textView.setText(getResources().getString(R.string.detailTemp, tempInt));
     }
 
     private void setWeatherIcon() {

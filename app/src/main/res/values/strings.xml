@@ -21,6 +21,8 @@
     <string name="detailStatusClosed">closed</string>
     <string name="detailStatusUnknown">Unknown</string>
 
+    <string name="detailTemp">%1$d°</string>
+
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
         <item>by distance</item>
