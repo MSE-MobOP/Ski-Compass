@@ -56,12 +56,18 @@ public class DetailActivity extends AppCompatActivity {
         checkWebButton();
     }
 
+    /**
+     * Do all stuff which corresponds to weather-setup
+     */
     private void setWeather() {
         setWeatherIcon();
         setWeatherDescription();
         setTemperature();
     }
 
+    /**
+     * Adds a brief description of the current weather to the detail-list
+     */
     private void setWeatherDescription() {
         String weatherDescriptionText;
 
@@ -80,6 +86,9 @@ public class DetailActivity extends AppCompatActivity {
         rowData[0] = new DetailRowData(getResources().getString(R.string.detailWeather), weatherDescriptionText);
     }
 
+    /**
+     * Get the temp of ski-resort (abs value), calculate celsius and displays on screen.
+     */
     private void setTemperature() {
         TextView textView = (TextView) findViewById(R.id.temperatureTextView);
         double tempAbs = selectedResort.getWeatherData().getMain().getTemp();
@@ -88,6 +97,9 @@ public class DetailActivity extends AppCompatActivity {
         textView.setText(getResources().getString(R.string.detailTemp, tempInt));
     }
 
+    /**
+     * Sets the big weather icon
+     */
     private void setWeatherIcon() {
         String weatherIconName = selectedResort.getWeatherData().getWeather().get(0).getIcon();
         if (weatherIconName.isEmpty() || weatherIconName.equals("")) {
@@ -99,6 +111,9 @@ public class DetailActivity extends AppCompatActivity {
         // Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherIconName+".png").fit().into(weatherView);
     }
 
+    /**
+     * Adds the status with description to the details-list
+     */
     private void setStatusDescription() {
         OperatingStatus status = selectedResort.getOperatingStatus();
         String statusDescription;
@@ -119,6 +134,9 @@ public class DetailActivity extends AppCompatActivity {
         rowData[1] = new DetailRowData(getResources().getString(R.string.detailStatus), statusDescription);
     }
 
+    /**
+     * Checks if chosen resort has a website. If not, the web button is disabled
+     */
     private void checkWebButton() {
         if (selectedResort.getOfficialWebsite() == null) {
             Button webButton = (Button) findViewById(R.id.detailWebButton);
@@ -126,6 +144,10 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a web-browser intent, checks if it can be handled and fires it
+     * @param v
+     */
     public void createWebIntent(View v) {
         if (selectedResort.getOfficialWebsite() != null) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW);
@@ -138,6 +160,10 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a google maps intent, checks if it can be handled and fires it
+     * @param v
+     */
     public void createMapIntent(View v) {
         String latLong = selectedResort.getLatitude() + "," + selectedResort.getLongitude();
         Uri mapsIntentUri = Uri.parse("geo:" + latLong + "?z=10&q=" + latLong + "(" + selectedResort.getName() + ")");

@@ -51,10 +51,17 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
         setupSpinner(sortPriority);
     }
 
+    /**
+     * This hides the loading symbol. Should be called after list has at least one element.
+     */
     public void disableLoadingSymbol() {
         findViewById(R.id.progressBar).setVisibility(View.GONE);
     }
 
+    /**
+     * Sets the spinner to choose the sorting algorithm
+     * @param defaultSortPriority
+     */
     private void setupSpinner(SortPriority defaultSortPriority) {
         Spinner spinner = toolbar.findViewById(R.id.spinnerSearchCriteria);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinnerSortItems, android.R.layout.simple_spinner_dropdown_item);
