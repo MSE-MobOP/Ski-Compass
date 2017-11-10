@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
     }
 
-
     public void listByDistance(View v) {
         list(SortPriority.LOCATION);
     }

@@ -5,9 +5,19 @@ package mobop.skicompass;
  */
 
 public enum SortPriority {
-    LOCATION,
-    WEATHER,
-    OPERATING,
-    OPENED_LIFTS,
-    OPENED_SLOPS,
+    LOCATION(0),
+    OPERATING(1),
+    WEATHER(2),
+    OPENED_LIFTS(3),
+    OPENED_SLOPS(4);
+
+    private int value;
+
+    SortPriority(int value) {
+        this.value = value;
+    }
+
+    public int getValue(){
+        return value;
+    }
 }

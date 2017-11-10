@@ -1,40 +1,35 @@
 package mobop.skicompass;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
+import android.widget.Spinner;
 import com.firebase.geofire.GeoLocation;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import mobop.skicompass.dataarchitecture.SkiResort;
 
 /**
  * Created by artanpapaj on 25.10.17.
  */
 
-public class ResultListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ResultListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     private ListView listView;
     private List<SkiResort> skiResortList;
     private GeoLocation location;
     private SortPriority sortPriority;
+    private final SortPriority[] sortPriorityValues = SortPriority.values();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
 
         if (skiResortList == null){
             skiResortList = new ArrayList<>();
@@ -49,8 +44,29 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
         double longitude = intent.getDoubleExtra("Longitude", 0.0);
         sortPriority = (SortPriority)intent.getSerializableExtra("SortPriority");
         location = new GeoLocation(latitude, longitude);
+
+        toolbar = (Toolbar) findViewById(R.id.listActivityToolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setupSpinner(sortPriority);
     }
 
+    public void disableLoadingSymbol() {
+        findViewById(R.id.progressBar).setVisibility(View.GONE);
+    }
+
+    private void setupSpinner(SortPriority defaultSortPriority) {
+        Spinner spinner = toolbar.findViewById(R.id.spinnerSearchCriteria);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinnerSortItems, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(defaultSortPriority.getValue());
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    /**
+     * On activity resume (activity lifecycle)
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,15 +77,38 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
         }
     }
 
+    /**
+     * On list item clicked
+     * @param adapterView
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        // Toast.makeText(getApplicationContext(), "Position :" + position, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("selectedItem", skiResortList.get(position));
         startActivity(intent);
     }
 
-    public void disableLoadingSymbol() {
-        findViewById(R.id.progressBar).setVisibility(View.GONE);
+    /**
+     * Spinner item selected
+     * @param adapterView
+     * @param view
+     * @param i
+     * @param l
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        SkiResortManager.getInstance().sortingList(sortPriorityValues[i]);
+    }
+
+    /**
+     * Nothing on spinner selected
+     * @param adapterView
+     */
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        //Do nothing
     }
 }

@@ -18,4 +18,13 @@
     <string name="detailWebButtonName">Site Internet</string>
     <string name="detailErrorWeb">Aucun navigateur installé</string>
     <string name="detailErrorWeatherIcon">Ne trouve pas l\'icône de la météo</string>
+
+    <!-- Array for spinner in list-activity -->
+    <string-array name="spinnerSortItems">
+        <item>trié par distance</item>
+        <item>trié par statut</item>
+        <item>trié par temps</item>
+        <item>trié par téléski ouvertes</item>
+        <item>trié par piste ouvertes</item>
+    </string-array>
 </resources>

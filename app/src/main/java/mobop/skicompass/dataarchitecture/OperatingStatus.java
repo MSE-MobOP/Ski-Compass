@@ -13,7 +13,7 @@ public enum OperatingStatus implements Serializable{
 
     private int value;
 
-    private OperatingStatus(int value){
+    OperatingStatus(int value){
         this.value = value;
     }
 

@@ -12,12 +12,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.Comparator;
-
-import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
-
 import static android.content.ContentValues.TAG;
 
 /**
@@ -28,6 +24,8 @@ public class SkiResortManager {
 
     private static final int MAX_RESULTS = 10;
     private static SkiResortManager instance;
+    private ArrayAdapter<SkiResort> adapter;
+    private GeoLocation location;
 
     private int numberOfResorts = 0;
     GeoFire geoFire = new GeoFire(FirebaseDatabase.getInstance().getReference("GeoFire"));
@@ -43,6 +41,8 @@ public class SkiResortManager {
     }
 
     public void loadNearestResorts(GeoLocation location, final ArrayAdapter<SkiResort> adapter, final SortPriority sortPriority) {
+        this.adapter = adapter;
+        this.location = location;
         numberOfResorts = 0;
         final GeoQuery query = geoFire.queryAtLocation(location, 10);
         query.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -57,7 +57,7 @@ public class SkiResortManager {
                         Log.d(TAG, "onDataChange ValueEvent: " + dataSnapshot);
                         SkiResort resort = dataSnapshot.getValue(SkiResort.class);
                         adapter.add(resort);
-                        sortingList(adapter, sortPriority);
+                        sortingList(sortPriority);
                         adapter.notifyDataSetChanged();
                     }
 
@@ -92,11 +92,11 @@ public class SkiResortManager {
         });
     }
 
-    private void sortingList(ArrayAdapter<SkiResort> adapter, SortPriority sortPriority) {
+    public void sortingList(SortPriority sortPriority) {
         Comparator<SkiResort> comparator;
         switch (sortPriority) {
             case LOCATION:
-                comparator = new DistanceComparator();
+                comparator = new DistanceComparator(location);
                 break;
             case WEATHER:
                 comparator = new WeatherComparator();
@@ -111,16 +111,43 @@ public class SkiResortManager {
                 comparator = new OpenedSlopsComparator();
                 break;
             default:
-                comparator = new DistanceComparator();
+                comparator = new DistanceComparator(location);
         }
         adapter.sort(comparator);
     }
 
     private class DistanceComparator implements Comparator<SkiResort> {
+
+        private GeoLocation location;
+
+        DistanceComparator(GeoLocation location) {
+            this.location = location;
+        }
+
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
-            // nothing to do because list is default Sorted by Distance with Atom-Bomb Search Algorithm
-            return 0;
+            double dist1 = distFrom(location.latitude, location.longitude, skiResort.getLatitude(), skiResort.getLongitude());
+            double dist2 = distFrom(location.latitude, location.longitude, t1.getLatitude(), t1.getLongitude());
+            return Double.compare(dist1, dist2);
+        }
+
+        /**
+         * Calculates distance between two coordinates given with lat and long
+         * @param lat1
+         * @param lng1
+         * @param lat2
+         * @param lng2
+         * @return
+         */
+        private double distFrom(double lat1, double lng1, double lat2, double lng2) {
+            double earthRadius = 6371000; //meters
+            double dLat = Math.toRadians(lat2-lat1);
+            double dLng = Math.toRadians(lng2-lng1);
+            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                            Math.sin(dLng/2) * Math.sin(dLng/2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return earthRadius * c;
         }
     }
 

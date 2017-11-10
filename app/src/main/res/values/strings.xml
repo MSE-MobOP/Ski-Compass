@@ -20,4 +20,13 @@
     <string name="detailWebButtonName">Website</string>
     <string name="detailErrorWeb">No web browser installed!</string>
     <string name="detailErrorWeatherIcon">Can\'t find the weather icon</string>
+
+    <!-- Array for spinner in list-activity -->
+    <string-array name="spinnerSortItems">
+        <item>by distance</item>
+        <item>by status</item>
+        <item>by weather</item>
+        <item>by opened lifts</item>
+        <item>by opened slopes</item>
+    </string-array>
 </resources>

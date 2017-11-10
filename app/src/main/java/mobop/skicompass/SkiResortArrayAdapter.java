@@ -1,7 +1,6 @@
 package mobop.skicompass;
 
 import android.content.Context;
-import android.database.CursorJoiner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
