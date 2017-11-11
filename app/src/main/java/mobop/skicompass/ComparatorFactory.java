@@ -69,10 +69,16 @@ public class ComparatorFactory {
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
             String icon1 = skiResort.getWeatherData().getWeather().get(0).getIcon();
-            String icon2 = skiResort.getWeatherData().getWeather().get(0).getIcon();
-            return Integer.compare(weightWeather(icon2), weightWeather(icon1));
+            String icon2 = t1.getWeatherData().getWeather().get(0).getIcon();
+            return Integer.compare(weightWeather(icon1), weightWeather(icon2));
         }
 
+        /***
+         * returns the Weather weighting from the weather Icon
+         * weather is sorted by Icons with order: 01,02,03,04,13,50,10,09,11
+         * @param weather icon from weather as string
+         * @return the relativ weighting from the Weather
+         */
         private int weightWeather(String weather) {
             int weight = Integer.parseInt(weather.substring(0, weather.length() - 2));
             int corrWeight;

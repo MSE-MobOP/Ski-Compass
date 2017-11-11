@@ -5,6 +5,7 @@ import com.firebase.geofire.GeoLocation;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
 import mobop.skicompass.dataarchitecture.Clouds;
 import mobop.skicompass.dataarchitecture.OperatingStatus;
 import mobop.skicompass.dataarchitecture.SkiResort;
+import mobop.skicompass.dataarchitecture.Weather;
 import mobop.skicompass.dataarchitecture.WeatherData;
 
 /**
@@ -40,35 +42,35 @@ public class SortingUnitTest {
 
         java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.OPERATING));
 
-        assertEquals(skiResortList.length, 3);
-        assertEquals(skiResortList[0].getOperatingStatus(), OperatingStatus.Operating);
-        assertEquals(skiResortList[1].getOperatingStatus(), OperatingStatus.Unknown);
-        assertEquals(skiResortList[2].getOperatingStatus(), OperatingStatus.Closed);
+        assertEquals(3, skiResortList.length);
+        assertEquals(OperatingStatus.Operating, skiResortList[0].getOperatingStatus());
+        assertEquals(OperatingStatus.Unknown, skiResortList[1].getOperatingStatus());
+        assertEquals(OperatingStatus.Closed, skiResortList[2].getOperatingStatus());
     }
 
     @Test
     public void testWeatherSorting() {
-        int bestCondition = 10;
-        int middleCondition = 50;
-        int weakCondition = 80;
+        String sun = "01d";
+        String cloudy = "02d";
+        String snow = "13d";
 
-        WeatherData weatherBest = new WeatherData();
-        weatherBest.setClouds(new Clouds(bestCondition));
-        WeatherData weatherMiddle = new WeatherData();
-        weatherMiddle.setClouds(new Clouds(middleCondition));
-        WeatherData weatherWeak = new WeatherData();
-        weatherWeak.setClouds(new Clouds(weakCondition));
+        WeatherData weatherBest = new WeatherData(null, new ArrayList<Weather>(), null);
+        weatherBest.getWeather().add(new Weather(sun, "", "", "", "", 1));
+        WeatherData weatherCloudy = new WeatherData(null, new ArrayList<Weather>(), null);
+        weatherCloudy.getWeather().add(new Weather(cloudy, "", "", "", "", 1));
+        WeatherData weatherWors = new WeatherData(null, new ArrayList<Weather>(), null);
+        weatherWors.getWeather().add(new Weather(snow, "", "", "", "", 1));
 
-        skiResortList[0].setWeatherData(weatherWeak);
+        skiResortList[0].setWeatherData(weatherWors);
         skiResortList[1].setWeatherData(weatherBest);
-        skiResortList[2].setWeatherData(weatherMiddle);
+        skiResortList[2].setWeatherData(weatherCloudy);
 
         java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.WEATHER));
 
-        assertEquals(skiResortList.length, 3);
-        assertEquals(skiResortList[0].getWeatherData().getClouds().getAll(), bestCondition);
-        assertEquals(skiResortList[1].getWeatherData().getClouds().getAll(), middleCondition);
-        assertEquals(skiResortList[2].getWeatherData().getClouds().getAll(), weakCondition);
+        assertEquals(3, skiResortList.length);
+        assertEquals(sun, skiResortList[0].getWeatherData().getWeather().get(0).getIcon());
+        assertEquals(cloudy, skiResortList[1].getWeatherData().getWeather().get(0).getIcon());
+        assertEquals(snow, skiResortList[2].getWeatherData().getWeather().get(0).getIcon());
     }
 
     @Test
@@ -83,10 +85,10 @@ public class SortingUnitTest {
 
         java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.OPENED_LIFTS));
 
-        assertEquals(skiResortList.length, 3);
-        assertEquals(skiResortList[0].getOpenedLifts(), mostOpened);
-        assertEquals(skiResortList[1].getOpenedLifts(), middleOpened);
-        assertEquals(skiResortList[2].getOpenedLifts(), leastOpened);
+        assertEquals(3, skiResortList.length);
+        assertEquals(mostOpened, skiResortList[0].getOpenedLifts());
+        assertEquals(middleOpened, skiResortList[1].getOpenedLifts());
+        assertEquals(leastOpened, skiResortList[2].getOpenedLifts());
     }
 
     @Test
@@ -101,10 +103,10 @@ public class SortingUnitTest {
 
         java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.OPENED_SLOPS));
 
-        assertEquals(skiResortList.length, 3);
-        assertEquals(skiResortList[0].getOpenedSlops(), mostOpened, 0.0);
-        assertEquals(skiResortList[1].getOpenedSlops(), middleOpened, 0.0);
-        assertEquals(skiResortList[2].getOpenedSlops(), leastOpened, 0.0);
+        assertEquals(3, skiResortList.length);
+        assertEquals(mostOpened, skiResortList[0].getOpenedSlops(), 0.0);
+        assertEquals(middleOpened, skiResortList[1].getOpenedSlops(), 0.0);
+        assertEquals(leastOpened, skiResortList[2].getOpenedSlops(), 0.0);
     }
 
     @Test
@@ -124,13 +126,13 @@ public class SortingUnitTest {
         skiResortList[2].setLongitude(nearestLocation.longitude);
 
         java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.LOCATION));
-        assertEquals(skiResortList.length, 3);
-        assertEquals(skiResortList[0].getLatitude(), nearestLocation.latitude, 0.0);
-        assertEquals(skiResortList[0].getLongitude(), nearestLocation.longitude, 0.0);
-        assertEquals(skiResortList[1].getLatitude(), middleLocation.latitude, 0.0);
-        assertEquals(skiResortList[1].getLongitude(), middleLocation.longitude, 0.0);
-        assertEquals(skiResortList[2].getLatitude(), farthestLocation.latitude, 0.0);
-        assertEquals(skiResortList[2].getLongitude(), farthestLocation.longitude, 0.0);
+        assertEquals(3, skiResortList.length);
+        assertEquals(nearestLocation.latitude, skiResortList[0].getLatitude(), 0.0);
+        assertEquals(nearestLocation.longitude, skiResortList[0].getLongitude(), 0.0);
+        assertEquals(middleLocation.latitude, skiResortList[1].getLatitude(), 0.0);
+        assertEquals(middleLocation.longitude, skiResortList[1].getLongitude(), 0.0);
+        assertEquals(farthestLocation.latitude, skiResortList[2].getLatitude(), 0.0);
+        assertEquals(farthestLocation.longitude, skiResortList[2].getLongitude(), 0.0);
 
     }
 }
