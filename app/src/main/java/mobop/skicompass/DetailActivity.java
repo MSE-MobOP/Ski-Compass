@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import mobop.skicompass.dataarchitecture.OperatingStatus;
@@ -47,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
         setTitle(selectedResort.getName());
 
         setStatusDescription();
-        setLiftsDescritpion();
+        setLiftsDescription();
         setSlopesDescription();
         setWeather();
 
@@ -71,8 +70,8 @@ public class DetailActivity extends AppCompatActivity {
         setTemperature();
         setMinMaxTemperatureDescription();
         setWindDescription();
-        //setHumidityDescription(); // TODO: 11.11.2017
-        //setPressureDescription(); // TODO: 11.11.2017
+        setHumidityDescription();
+        setPressureDescription();
     }
 
     /**
@@ -154,10 +153,23 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setWindDescription() {
         double windSpeed = selectedResort.getWeatherData().getWind().getSpeed();
-        rowData.add(new DetailRowData(getResources().getString(R.string.detailWind), Double.toString(windSpeed)));
+        String windSpeedString = getResources().getString(R.string.detailWindSpeedValue, windSpeed);
+        rowData.add(new DetailRowData(getResources().getString(R.string.detailWind), windSpeedString));
     }
 
-    private void setLiftsDescritpion() {
+    private void setHumidityDescription() {
+        int humidity = selectedResort.getWeatherData().getMain().getHumidity();
+        String humidityString = getResources().getString(R.string.detailHumidityValue, humidity);
+        rowData.add(new DetailRowData(getResources().getString(R.string.detailHumidity), humidityString));
+    }
+
+    private void setPressureDescription() {
+        double pressure = selectedResort.getWeatherData().getMain().getPressure();
+        String pressureString = getResources().getString(R.string.detailPressureValue, pressure);
+        rowData.add(new DetailRowData(getResources().getString(R.string.detailPressure), pressureString));
+    }
+
+    private void setLiftsDescription() {
         int openLifts = selectedResort.getOpenedLifts();
         rowData.add(new DetailRowData(getResources().getString(R.string.detailOpenLifts), Integer.toString(openLifts)));
     }

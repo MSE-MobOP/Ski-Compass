@@ -30,6 +30,9 @@
     <string name="detailOpenLifts">Ascenseurs ouverts</string>
     <string name="detailOpenSlopes">Pistes ouverts (km)</string>
     <string name="detailTempMinMax">Température min/max</string>
+    <string name="noGPS">Aucun emplacement trouvé. Votre GPS est-il actif?</string>
+    <string name="detailHumidity">Humidité de l\'air</string>
+    <string name="detailPressure">Pression atmosphérique</string>
 
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
@@ -39,6 +42,5 @@
         <item>trié par téléski ouvertes</item>
         <item>trié par piste ouvertes</item>
     </string-array>
-    <string name="noGPS">Aucun emplacement trouvé. Votre GPS est-il actif?</string>
-    <string name="detailTemp">%1$d°</string>
+
 </resources>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="detailTemp">%1$d°</string>
-    <string name="detailTempMinMaxFormat">%1$d°/%2$d°</string>
+    <string name="detailTemp">%1$d °C</string>
+    <string name="detailTempMinMaxFormat">%1$d °C / %2$d °C</string>
+    <string name="detailPressureValue">%1$.2f hPa</string>
+    <string name="detailHumidityValue">%1$d %%</string>
+    <string name="detailWindSpeedValue">%1$.2f km/h</string>
 
     <string name="app_name">Ski-Compass</string>
     <string name="noData">No Data</string>
@@ -31,10 +34,15 @@
     <string name="mainSlopsButton">List by opened slops</string>
    <string name="noGPS">No Location found. Is your GPS active?</string>
     <string name="detailTempPlaceholder">23°</string>
-    <string name="detailWind">Windspeed</string>
+    <string name="detailWind">Wind speed</string>
     <string name="detailOpenLifts">Open lifts</string>
     <string name="detailOpenSlopes">Open slopes</string>
-    <string name="detailTempMinMax">Temperature min/max</string>    <!-- Array for spinner in list-activity -->
+    <string name="detailTempMinMax">Temperature min/max</string>
+    <string name="detailHumidity">Humidity</string>
+    <string name="detailPressure">Air pressure</string>
+
+
+    <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
         <item>by distance</item>
         <item>by status</item>

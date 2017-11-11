@@ -30,6 +30,9 @@
     <string name="detailOpenLifts">Geöffnete Lifte</string>
     <string name="detailOpenSlopes">Geöffnete Piste (km)</string>
     <string name="detailTempMinMax">Temperatur min/max</string>
+    <string name="noGPS">Unbekannter Standort. Ist dein GPS aktiviert?</string>
+    <string name="detailHumidity">Luftfeuchtigkeit</string>
+    <string name="detailPressure">Luftdruck</string>
 
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
@@ -39,6 +42,4 @@
         <item>nach geöffneten Liften</item>
         <item>nach geöffneten Pisten</item>
     </string-array>
-    <string name="noGPS">Unbekannter Standort. Ist dein GPS aktiviert?</string>
-    <string name="detailTemp">%1$d°</string>
 </resources>
