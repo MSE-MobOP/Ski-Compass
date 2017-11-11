@@ -36,8 +36,7 @@ public class Main implements Serializable{
 		this.humidity = humidity;
 	}
 
-	public double getTemp() {
-        return temp;
+	public double getTemp() {        return temp;
     }
 
     public double getTempMin() {

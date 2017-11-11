@@ -41,23 +41,6 @@ public class SkiResort implements Serializable {
 	@SerializedName("latitude")
 	private double latitude;
 
-	public SkiResort(){};
-
-	public SkiResort(int id, String name, OperatingStatus operatingStatus, String nightSkiing, int totalLifts, int openedLifts, double totalSlops, double openedSlops, String officialWebsite, WeatherData weatherData, double longitude, double latitude) {
-		this.id = id;
-		this.name = name;
-		this.operatingStatus = operatingStatus;
-		this.nightSkiing = nightSkiing;
-		this.totalLifts = totalLifts;
-		this.openedLifts = openedLifts;
-		this.totalSlops = totalSlops;
-		this.openedSlops = openedSlops;
-		this.officialWebsite = officialWebsite;
-		this.weatherData = weatherData;
-		this.longitude = longitude;
-		this.latitude = latitude;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -133,13 +116,5 @@ public class SkiResort implements Serializable {
 	@Override
 	public String toString() {
 		return name;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
 	}
 }

@@ -26,6 +26,10 @@
     <string name="mainWeatherButton">Liste par temps</string>
     <string name="mainLiftsButton">Liste par ascenseurs ouverts</string>
     <string name="mainSlopsButton">Liste pour les pistes ouvertes</string>
+    <string name="detailWind">Vitesse du vent</string>
+    <string name="detailOpenLifts">Ascenseurs ouverts</string>
+    <string name="detailOpenSlopes">Pistes ouverts (km)</string>
+    <string name="detailTempMinMax">Température min/max</string>
 
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
