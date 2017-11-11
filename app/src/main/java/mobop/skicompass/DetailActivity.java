@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,7 +30,7 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 public class DetailActivity extends AppCompatActivity {
 
     private SkiResort selectedResort;
-    private List<DetailRowData> rowData;
+    private ArrayList<DetailRowData> rowData;
     private static final String WRONG_BUTTON = "Wrong binding of Button";
 
     @Override
@@ -41,9 +42,7 @@ public class DetailActivity extends AppCompatActivity {
 
         ListView detailList = (ListView) findViewById(R.id.detailList);
         detailList.setEnabled(false);
-
-        DetailRowData[] rowDataArray = new DetailRowData[rowData.size()];
-        rowDataArray = rowData.toArray(rowDataArray);
+        rowData = new ArrayList<>();
 
         setTitle(selectedResort.getName());
 
@@ -51,6 +50,9 @@ public class DetailActivity extends AppCompatActivity {
         setStatusDescription();
         setLiftsDescritpion();
         setSlopesDescription();
+
+        DetailRowData[] rowDataArray = new DetailRowData[rowData.size()];
+        rowDataArray = rowData.toArray(rowDataArray);
 
         DetailArrayAdapter detailArrayAdapter = new DetailArrayAdapter(this, rowDataArray);
         detailList.setAdapter(detailArrayAdapter);
@@ -149,8 +151,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setWindDescription() {
-        /*double windSpeed = selectedResort.getWeatherData().getWind().getSpeed();
-        rowData.add(new DetailRowData(getResources().getString(R.string.detailWind), Double.toString(windSpeed)));*/
+        double windSpeed = selectedResort.getWeatherData().getWind().getSpeed();
+        rowData.add(new DetailRowData(getResources().getString(R.string.detailWind), Double.toString(windSpeed)));
     }
 
     private void setLiftsDescritpion() {
