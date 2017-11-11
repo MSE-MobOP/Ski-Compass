@@ -98,26 +98,7 @@ public class SkiResortManager implements GeoQueryEventListener{
     }
 
     public void sortingList(SortPriority sortPriority) {
-        Comparator<SkiResort> comparator;
-        switch (sortPriority) {
-            case LOCATION:
-                comparator = comparatorFactory.getDistanceComparator(location);
-                break;
-            case WEATHER:
-                comparator = comparatorFactory.getWeatherComparator();
-                break;
-            case OPERATING:
-                comparator = comparatorFactory.getOperatingComparator();
-                break;
-            case OPENED_LIFTS:
-                comparator = comparatorFactory.getOpenedLiftsComparator();
-                break;
-            case OPENED_SLOPS:
-                comparator = comparatorFactory.getOpenedSlopsComparator();
-                break;
-            default:
-                comparator = comparatorFactory.getDistanceComparator(location);
-        }
+        Comparator<SkiResort> comparator = ComparatorFactory.getComparator(location, sortPriority);
         adapter.sort(comparator);
     }
 }

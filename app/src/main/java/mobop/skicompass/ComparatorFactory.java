@@ -12,27 +12,24 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 
 public class ComparatorFactory {
 
-    public DistanceComparator getDistanceComparator(GeoLocation location) {
-        return new DistanceComparator(location);
+    public static Comparator<SkiResort> getComparator(GeoLocation location, SortPriority sortPriority){
+        switch (sortPriority) {
+            case LOCATION:
+                return new DistanceComparator(location);
+            case WEATHER:
+                return new WeatherComparator();
+            case OPERATING:
+                return new OperatingComparator();
+            case OPENED_LIFTS:
+                return new OpenedLiftsComparator();
+            case OPENED_SLOPS:
+                return new OpenedSlopsComparator();
+            default:
+                return new DistanceComparator(location);
+        }
     }
 
-    public static WeatherComparator getWeatherComparator() {
-        return new WeatherComparator();
-    }
-
-    public static OperatingComparator getOperatingComparator() {
-        return new OperatingComparator();
-    }
-
-    public static OpenedLiftsComparator getOpenedLiftsComparator() {
-        return new OpenedLiftsComparator();
-    }
-
-    public OpenedSlopsComparator getOpenedSlopsComparator() {
-        return new OpenedSlopsComparator();
-    }
-
-    private class DistanceComparator implements Comparator<SkiResort> {
+    private static class DistanceComparator implements Comparator<SkiResort> {
 
         private GeoLocation location;
 
