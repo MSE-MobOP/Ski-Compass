@@ -19,7 +19,15 @@ public class Main implements Serializable{
 	
 	@SerializedName("tempMax")
     private double tempMax;
-    
+
+    public Main(){};
+
+    public Main(double temp, double tempMin, double tempMax) {
+        this.temp = temp;
+        this.tempMin = tempMin;
+        this.tempMax = tempMax;
+    }
+
     public double getTemp() {
         return temp;
     }
