@@ -1,10 +1,14 @@
 package mobop.skicompass;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,6 +32,7 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        paintStatusBar();
 
         if (skiResortList == null){
             skiResortList = new ArrayList<>();
@@ -53,6 +58,17 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         setupSpinner(sortPriority);
+    }
+
+    /**
+     * On android devices >= API21 it's possible to change status bar color, not on lower
+     */
+    public void paintStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
     }
 
     /**
