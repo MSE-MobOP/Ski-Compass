@@ -29,13 +29,12 @@
     <string name="mainWeatherButton">List by weather</string>
     <string name="mainLiftsButton">List by opened lifts</string>
     <string name="mainSlopsButton">List by opened slops</string>
+   <string name="noGPS">No Location found. Is your GPS active?</string>
     <string name="detailTempPlaceholder">23°</string>
     <string name="detailWind">Windspeed</string>
     <string name="detailOpenLifts">Open lifts</string>
     <string name="detailOpenSlopes">Open slopes</string>
-    <string name="detailTempMinMax">Temperature min/max</string>
-
-    <!-- Array for spinner in list-activity -->
+    <string name="detailTempMinMax">Temperature min/max</string>    <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
         <item>by distance</item>
         <item>by status</item>

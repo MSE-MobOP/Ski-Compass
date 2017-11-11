@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private void list(SortPriority sortPriority) {
         if (location == null) {
-            Toast.makeText(getApplicationContext(), "No Location found. Is your GPS active?", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.noGPS, Toast.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(this, ResultListActivity.class);
