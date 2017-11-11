@@ -10,4 +10,6 @@ On each Resort you see the Weather Conditions some actual Informations and you c
 - Christian Schmid
 - Artan Papaja
 
-
+## Usage
+Clone this Project and open it with Android-Studio (Version 2.3.3 or higher)
+The DataApplication (which is used to fill the Firebase Database) is a simple Eclipse Project in the Subfolder [dataApplication](dataApplication). To start you need to place the Firebase json Key file placed in the root Directory form the dataApplication Directory
