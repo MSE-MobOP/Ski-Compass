@@ -46,10 +46,10 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(selectedResort.getName());
 
-        setWeather();
         setStatusDescription();
         setLiftsDescritpion();
         setSlopesDescription();
+        setWeather();
 
         DetailRowData[] rowDataArray = new DetailRowData[rowData.size()];
         rowDataArray = rowData.toArray(rowDataArray);
@@ -71,6 +71,8 @@ public class DetailActivity extends AppCompatActivity {
         setTemperature();
         setMinMaxTemperatureDescription();
         setWindDescription();
+        //setHumidityDescription(); // TODO: 11.11.2017
+        //setPressureDescription(); // TODO: 11.11.2017
     }
 
     /**
