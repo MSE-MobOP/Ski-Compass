@@ -71,8 +71,29 @@ public class ComparatorFactory {
     private static class WeatherComparator implements Comparator<SkiResort> {
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
-            return Integer.compare(skiResort.getWeatherData().getClouds().getAll(),
-                    t1.getWeatherData().getClouds().getAll());
+            String icon1 = skiResort.getWeatherData().getWeather().get(0).getIcon();
+            String icon2 = skiResort.getWeatherData().getWeather().get(0).getIcon();
+            return Integer.compare(weightWeather(icon2), weightWeather(icon1));
+        }
+
+        private int weightWeather(String weather) {
+            int weight = Integer.parseInt(weather.substring(0, weather.length() - 2));
+            int corrWeight;
+            switch(weight) {
+                case 13:
+                    corrWeight = 5;
+                    break;
+                case 10:
+                    corrWeight = 7;
+                    break;
+                case 50:
+                    corrWeight = 6;
+                    break;
+                default:
+                    corrWeight = weight;
+                    break;
+            }
+            return corrWeight;
         }
     }
 
