@@ -35,8 +35,8 @@ public class DetailArrayAdapter extends ArrayAdapter<DetailRowData> {
         }
 
         if (rowData[position] != null){
-            TextView listDescription = (TextView) rowView.findViewById(R.id.listDescription);
-            TextView listValue = (TextView) rowView.findViewById(R.id.listValue);
+            TextView listDescription = rowView.findViewById(R.id.listDescription);
+            TextView listValue =  rowView.findViewById(R.id.listValue);
 
             if (listDescription != null) {
                 listDescription.setText(rowData[position].description);

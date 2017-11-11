@@ -1,13 +1,16 @@
 package mobop.skicompass;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +49,8 @@ public class DetailActivity extends AppCompatActivity {
         detailList.setAdapter(detailArrayAdapter);
 
         checkWebButton();
+
+        blowDetailListToFullHeight(detailList);
     }
 
     /**
@@ -171,6 +176,27 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.detailErrorNav), Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Resizes the list to fit all items in height
+     * @param detailList
+     */
+    private void blowDetailListToFullHeight(ListView detailList) {
+        ListAdapter detailListAdapter = detailList.getAdapter();
+        if (detailListAdapter == null) return;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(detailList.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < detailListAdapter.getCount(); i++) {
+            view = detailListAdapter.getView(i, view, detailList);
+            if (i == 0) view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ActionBar.LayoutParams.WRAP_CONTENT));
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = detailList.getLayoutParams();
+        params.height = totalHeight + (detailList.getDividerHeight() * (detailListAdapter.getCount() - 1));
+        detailList.setLayoutParams(params);
     }
 
 }
