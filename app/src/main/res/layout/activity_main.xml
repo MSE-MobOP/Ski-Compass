@@ -1,63 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:background="@color/colorBackground">
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find ski-resort around your current Destination"
-        android:gravity="center"
-        />
-    
-    <Button
-        android:id="@+id/listDistanceButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="listByDistance"
-        android:theme="@style/AppTheme.Button"
-        android:text="List by Distance"/>
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
 
-    <Button
-        android:id="@+id/listOperatingStatusButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="listByOperatingStatus"
-        android:theme="@style/AppTheme.Button"
-        android:text="List by Operating Status"/>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/main" />
 
-    <Button
-        android:id="@+id/listWeatherButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="listByWeather"
-        android:theme="@style/AppTheme.Button"
-        android:text="List by Weather"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="@string/mainText" />
 
-    <Button
-        android:id="@+id/listLiftsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="listByOpenedLifts"
-        android:theme="@style/AppTheme.Button"
-        android:text="List by Opened Lifts"/>
+        <Button
+            android:id="@+id/listDistanceButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="listByDistance"
+            android:text="@string/mainDistanceButton"
+            android:theme="@style/AppTheme.Button" />
 
-    <Button
-        android:id="@+id/listSlopsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="listByOpenedSlops"
-        android:theme="@style/AppTheme.Button"
-        android:text="List by Opened Slops"/>
+        <Button
+            android:id="@+id/listOperatingStatusButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="listByOperatingStatus"
+            android:text="@string/mainOperatingButton"
+            android:theme="@style/AppTheme.Button" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/listWeatherButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="listByWeather"
+            android:text="@string/mainWeatherButton"
+            android:theme="@style/AppTheme.Button" />
+
+        <Button
+            android:id="@+id/listLiftsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="listByOpenedLifts"
+            android:text="@string/mainLiftsButton"
+            android:theme="@style/AppTheme.Button" />
+
+        <Button
+            android:id="@+id/listSlopsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="listByOpenedSlops"
+            android:text="@string/mainSlopsButton"
+            android:theme="@style/AppTheme.Button" />
+
+
+    </LinearLayout>
+
+</ScrollView>
