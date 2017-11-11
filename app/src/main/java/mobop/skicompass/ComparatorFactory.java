@@ -80,7 +80,7 @@ public class ComparatorFactory {
          * @return the relativ weighting from the Weather
          */
         private int weightWeather(String weather) {
-            int weight = Integer.parseInt(weather.substring(0, weather.length() - 2));
+            int weight = Integer.parseInt(weather.substring(0, weather.length() - 1));
             int corrWeight;
             switch(weight) {
                 case 13:
