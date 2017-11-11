@@ -238,7 +238,9 @@ public class DetailActivity extends AppCompatActivity {
      */
     private void blowDetailListToFullHeight(ListView detailList) {
         ListAdapter detailListAdapter = detailList.getAdapter();
-        if (detailListAdapter == null) return;
+        if (detailListAdapter == null) {
+            return;
+        }
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(detailList.getWidth(), View.MeasureSpec.UNSPECIFIED);
         int totalHeight = 0;
         View view = null;

@@ -12,6 +12,9 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 
 public class ComparatorFactory {
 
+    private ComparatorFactory() {}
+
+    @java.lang.SuppressWarnings("squid:MethodCyclomaticComplexity") // If implemented with getXXXComparator, the switch-case would appear in the calling method
     public static Comparator<SkiResort> getComparator(GeoLocation location, SortPriority sortPriority){
         switch (sortPriority) {
             case LOCATION:

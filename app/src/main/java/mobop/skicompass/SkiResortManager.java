@@ -28,14 +28,11 @@ public class SkiResortManager implements GeoQueryEventListener{
     private GeoLocation location;
     private SortPriority sortPriority;
     private GeoQuery query;
-    private ComparatorFactory comparatorFactory;
 
     private int numberOfResorts = 0;
     GeoFire geoFire = new GeoFire(FirebaseDatabase.getInstance().getReference("GeoFire"));
 
-    private SkiResortManager() {
-        comparatorFactory = new ComparatorFactory();
-    }
+    private SkiResortManager() {}
 
     public static SkiResortManager getInstance() {
         if (instance == null) {

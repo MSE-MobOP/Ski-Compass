@@ -14,6 +14,7 @@ public class Clouds implements Serializable {
 	private int all;
 
 	private Clouds() {
+		// Needed for GSon and FireBase
 	}
 
 	public Clouds(int all) {
