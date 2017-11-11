@@ -14,10 +14,10 @@ public class Main implements Serializable{
 	@SerializedName("temp")
     private double temp;
 	
-	@SerializedName("tempMin")
+	@SerializedName("temp_min")
     private double tempMin;
 	
-	@SerializedName("tempMax")
+	@SerializedName("temp_max")
     private double tempMax;
 	
 	@SerializedName("pressure")
@@ -36,7 +36,8 @@ public class Main implements Serializable{
 		this.humidity = humidity;
 	}
 
-	public double getTemp() {        return temp;
+	public double getTemp() {
+        return temp;
     }
 
     public double getTempMin() {
