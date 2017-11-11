@@ -70,7 +70,7 @@ public class ComparatorFactory {
         public int compare(SkiResort skiResort, SkiResort t1) {
             String icon1 = skiResort.getWeatherData().getWeather().get(0).getIcon();
             String icon2 = t1.getWeatherData().getWeather().get(0).getIcon();
-            return Integer.compare(weightWeather(icon2), weightWeather(icon1));
+            return Integer.compare(weightWeather(icon1), weightWeather(icon2));
         }
 
         /***
