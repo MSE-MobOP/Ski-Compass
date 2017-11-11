@@ -54,11 +54,11 @@ public class SortingUnitTest {
         String cloudy = "02d";
         String snow = "13d";
 
-        WeatherData weatherBest = new WeatherData(null, new ArrayList<Weather>(), null);
+        WeatherData weatherBest = new WeatherData(null, new ArrayList<Weather>(), null, null);
         weatherBest.getWeather().add(new Weather(sun, "", "", "", "", 1));
-        WeatherData weatherCloudy = new WeatherData(null, new ArrayList<Weather>(), null);
+        WeatherData weatherCloudy = new WeatherData(null, new ArrayList<Weather>(), null, null);
         weatherCloudy.getWeather().add(new Weather(cloudy, "", "", "", "", 1));
-        WeatherData weatherWors = new WeatherData(null, new ArrayList<Weather>(), null);
+        WeatherData weatherWors = new WeatherData(null, new ArrayList<Weather>(), null, null);
         weatherWors.getWeather().add(new Weather(snow, "", "", "", "", 1));
 
         skiResortList[0].setWeatherData(weatherWors);

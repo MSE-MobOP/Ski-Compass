@@ -27,11 +27,12 @@ public class WeatherData implements Serializable {
     public WeatherData() {
     }
 
-    public WeatherData(Main main, List<Weather> weather, Clouds clouds) {
-        this.main = main;
-        this.weather = weather;
-        this.clouds = clouds;
-    }
+    public WeatherData(Main main, List<Weather> weather, Clouds clouds, Wind wind) {
+		this.main = main;
+		this.weather = weather;
+		this.clouds = clouds;
+		this.wind = wind;
+	}
 
     public Main getMain() {
         return main;
@@ -44,16 +45,8 @@ public class WeatherData implements Serializable {
     public Clouds getClouds() {
         return clouds;
     }
-
-    public void setClouds(Clouds clouds) {
-        this.clouds = clouds;
-    }
     
     public Wind getWind() {
 		return wind;
-	}
-    
-    public void setWind(Wind wind) {
-		this.wind = wind;
 	}
 }
