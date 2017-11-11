@@ -10,19 +10,23 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Wind implements Serializable {
-    
+
 	@SerializedName("deg")
-    private String deg;
-	
-	@SerializedName("speed")
-    private String speed;
-    
-    public double getDeg() {
-        return Double.parseDouble(deg);
-    }
-    
-    public double getSpeed() {
-        return Double.parseDouble(speed);
-    }
-    
-}
+	private double deg;	@SerializedName("speed")
+	private double speed;
+
+	public Wind() {
+	}
+
+	public Wind(double deg, double speed) {
+		this.deg = deg;
+		this.speed = speed;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public double getDeg() {
+		return deg;
+	}}

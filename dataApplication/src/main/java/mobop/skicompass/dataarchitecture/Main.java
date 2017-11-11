@@ -19,9 +19,24 @@ public class Main implements Serializable{
 	
 	@SerializedName("tempMax")
     private double tempMax;
+	
+	@SerializedName("pressure")
+	private double pressure;
+	
+	@SerializedName("humidity")
+	private int humidity; 
+	
+    public Main(){};
     
-    public double getTemp() {
-        return temp;
+    public Main(double temp, double tempMin, double tempMax, double pressure, int humidity) {
+		this.temp = temp;
+		this.tempMin = tempMin;
+		this.tempMax = tempMax;
+		this.pressure = pressure;
+		this.humidity = humidity;
+	}
+
+	public double getTemp() {        return temp;
     }
 
     public double getTempMin() {
@@ -31,5 +46,13 @@ public class Main implements Serializable{
     public double getTempMax() {
         return tempMax;
     }
+    
+    public int getHumidity() {
+		return humidity;
+	}
+    
+    public double getPressure() {
+		return pressure;
+	}
 
 }

@@ -29,6 +29,24 @@ public class WeatherData implements Serializable {
 		return weather;
 	}
 
-	public Clouds getClouds(){return clouds;}
+    public WeatherData(Main main, List<Weather> weather, Clouds clouds, Wind wind) {
+		this.main = main;
+		this.weather = weather;
+		this.clouds = clouds;
+		this.wind = wind;
+	}
+    public Main getMain() {
+        return main;
+    }
 
-}
+    public List<Weather> getWeather() {
+        return weather;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+    
+    public Wind getWind() {
+		return wind;
+	}}
