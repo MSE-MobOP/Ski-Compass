@@ -1,7 +1,11 @@
 package mobop.skicompass;
 
+import com.firebase.geofire.GeoLocation;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -99,5 +103,33 @@ public class SortingUnitTest {
         assertEquals(skiResortList[0].getOpenedLifts(), mostOpened);
         assertEquals(skiResortList[1].getOpenedLifts(), middleOpened);
         assertEquals(skiResortList[2].getOpenedLifts(), leastOpened);
+    }
+
+    @Test
+    public void testLocationSorting(){
+        GeoLocation myLocation = new GeoLocation(48, 9);
+        GeoLocation nearestLocation = new GeoLocation(48.1, 9.1);
+        GeoLocation middleLocation = new GeoLocation(49, 9);
+        GeoLocation farthestLocation = new GeoLocation(48, 5);
+
+        skiResortList[0].setLatitude(middleLocation.latitude);
+        skiResortList[0].setLongitude(middleLocation.longitude);
+
+
+        skiResortList[1].setLatitude(farthestLocation.latitude);
+        skiResortList[1].setLongitude(farthestLocation.longitude);
+
+        skiResortList[2].setLatitude(nearestLocation.latitude);
+        skiResortList[2].setLongitude(nearestLocation.longitude);
+
+        java.util.Arrays.sort(skiResortList, ComparatorFactory.getDistanceComparator(myLocation));
+        assertEquals(skiResortList.length, 3);
+        assertEquals(skiResortList[0].getLatitude(), nearestLocation.latitude, 0.0);
+        assertEquals(skiResortList[0].getLongitude(), nearestLocation.longitude, 0.0);
+        assertEquals(skiResortList[1].getLatitude(), middleLocation.latitude, 0.0);
+        assertEquals(skiResortList[1].getLongitude(), middleLocation.longitude, 0.0);
+        assertEquals(skiResortList[2].getLatitude(), farthestLocation.latitude, 0.0);
+        assertEquals(skiResortList[2].getLongitude(), farthestLocation.longitude, 0.0);
+
     }
 }

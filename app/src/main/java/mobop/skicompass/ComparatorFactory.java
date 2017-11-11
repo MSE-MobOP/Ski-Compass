@@ -12,7 +12,7 @@ import mobop.skicompass.dataarchitecture.SkiResort;
 
 public class ComparatorFactory {
 
-    public DistanceComparator getDistanceComparator(GeoLocation location) {
+    public static DistanceComparator getDistanceComparator(GeoLocation location) {
         return new DistanceComparator(location);
     }
 
@@ -32,7 +32,7 @@ public class ComparatorFactory {
         return new OpenedSlopsComparator();
     }
 
-    private class DistanceComparator implements Comparator<SkiResort> {
+    private static class DistanceComparator implements Comparator<SkiResort> {
 
         private GeoLocation location;
 
