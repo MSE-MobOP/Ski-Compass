@@ -41,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
         ListView detailList = (ListView) findViewById(R.id.detailList);
         detailList.setEnabled(false);
+        detailList.setFocusable(false);
         rowData = new ArrayList<>();
 
         setTitle(selectedResort.getName());
@@ -176,7 +177,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setSlopesDescription() {
         double openSlopes = selectedResort.getOpenedSlops();
-        rowData.add(new DetailRowData(getResources().getString(R.string.detailOpenSlopes), Double.toString(openSlopes)));
+        String openSlopesString = getResources().getString(R.string.detailOpenSlopesValue, openSlopes);
+        rowData.add(new DetailRowData(getResources().getString(R.string.detailOpenSlopes), openSlopesString));
     }
 
     /**

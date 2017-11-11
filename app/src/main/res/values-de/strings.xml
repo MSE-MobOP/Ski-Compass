@@ -28,7 +28,7 @@
     <string name="mainSlopsButton">Liste nach geöffneten Pisten</string>
     <string name="detailWind">Windgeschwindigkeit</string>
     <string name="detailOpenLifts">Geöffnete Lifte</string>
-    <string name="detailOpenSlopes">Geöffnete Piste (km)</string>
+    <string name="detailOpenSlopes">Geöffnete Piste</string>
     <string name="detailTempMinMax">Temperatur min/max</string>
     <string name="noGPS">Unbekannter Standort. Ist dein GPS aktiviert?</string>
     <string name="detailHumidity">Luftfeuchtigkeit</string>

@@ -28,7 +28,7 @@
     <string name="mainSlopsButton">Liste pour les pistes ouvertes</string>
     <string name="detailWind">Vitesse du vent</string>
     <string name="detailOpenLifts">Ascenseurs ouverts</string>
-    <string name="detailOpenSlopes">Pistes ouverts (km)</string>
+    <string name="detailOpenSlopes">Pistes ouverts</string>
     <string name="detailTempMinMax">Température min/max</string>
     <string name="noGPS">Aucun emplacement trouvé. Votre GPS est-il actif?</string>
     <string name="detailHumidity">Humidité de l\'air</string>
