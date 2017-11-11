@@ -21,9 +21,11 @@ import mobop.skicompass.dataarchitecture.WeatherData;
 public class SortingUnitTest {
 
     private SkiResort[] skiResortList;
+    GeoLocation myLocation;
 
     @Before
     public void prepareTest() {
+        myLocation = new GeoLocation(48, 9);
         skiResortList = new SkiResort[3];
         skiResortList[0] = new SkiResort();
         skiResortList[1] = new SkiResort();
@@ -36,7 +38,7 @@ public class SortingUnitTest {
         skiResortList[1].setOperatingStatus(OperatingStatus.Unknown);
         skiResortList[2].setOperatingStatus(OperatingStatus.Operating);
 
-        java.util.Arrays.sort(skiResortList, ComparatorFactory.getOperatingComparator());
+        java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.OPERATING));
 
         assertEquals(skiResortList.length, 3);
         assertEquals(skiResortList[0].getOperatingStatus(), OperatingStatus.Operating);
@@ -61,7 +63,7 @@ public class SortingUnitTest {
         skiResortList[1].setWeatherData(weatherBest);
         skiResortList[2].setWeatherData(weatherMiddle);
 
-        java.util.Arrays.sort(skiResortList, ComparatorFactory.getWeatherComparator());
+        java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.WEATHER));
 
         assertEquals(skiResortList.length, 3);
         assertEquals(skiResortList[0].getWeatherData().getClouds().getAll(), bestCondition);
@@ -79,7 +81,7 @@ public class SortingUnitTest {
         skiResortList[1].setOpenedLifts(leastOpened);
         skiResortList[2].setOpenedLifts(mostOpened);
 
-        java.util.Arrays.sort(skiResortList, ComparatorFactory.getOpenedLiftsComparator());
+        java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.OPENED_LIFTS));
 
         assertEquals(skiResortList.length, 3);
         assertEquals(skiResortList[0].getOpenedLifts(), mostOpened);
@@ -88,26 +90,25 @@ public class SortingUnitTest {
     }
 
     @Test
-    public void testOpenedSlopsSorting(){
+    public void testOpenedSlopsSorting() {
         int mostOpened = 50;
         int middleOpened = 25;
         int leastOpened = 0;
 
-        skiResortList[0].setOpenedLifts(middleOpened);
-        skiResortList[1].setOpenedLifts(leastOpened);
-        skiResortList[2].setOpenedLifts(mostOpened);
+        skiResortList[0].setOpenedSlops(middleOpened);
+        skiResortList[1].setOpenedSlops(leastOpened);
+        skiResortList[2].setOpenedSlops(mostOpened);
 
-        java.util.Arrays.sort(skiResortList, ComparatorFactory.getOpenedLiftsComparator());
+        java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.OPENED_SLOPS));
 
         assertEquals(skiResortList.length, 3);
-        assertEquals(skiResortList[0].getOpenedLifts(), mostOpened);
-        assertEquals(skiResortList[1].getOpenedLifts(), middleOpened);
-        assertEquals(skiResortList[2].getOpenedLifts(), leastOpened);
+        assertEquals(skiResortList[0].getOpenedSlops(), mostOpened, 0.0);
+        assertEquals(skiResortList[1].getOpenedSlops(), middleOpened, 0.0);
+        assertEquals(skiResortList[2].getOpenedSlops(), leastOpened, 0.0);
     }
 
     @Test
-    public void testLocationSorting(){
-        GeoLocation myLocation = new GeoLocation(48, 9);
+    public void testLocationSorting() {
         GeoLocation nearestLocation = new GeoLocation(48.1, 9.1);
         GeoLocation middleLocation = new GeoLocation(49, 9);
         GeoLocation farthestLocation = new GeoLocation(48, 5);
@@ -122,7 +123,7 @@ public class SortingUnitTest {
         skiResortList[2].setLatitude(nearestLocation.latitude);
         skiResortList[2].setLongitude(nearestLocation.longitude);
 
-        java.util.Arrays.sort(skiResortList, ComparatorFactory.getDistanceComparator(myLocation));
+        java.util.Arrays.sort(skiResortList, ComparatorFactory.getComparator(myLocation, SortPriority.LOCATION));
         assertEquals(skiResortList.length, 3);
         assertEquals(skiResortList[0].getLatitude(), nearestLocation.latitude, 0.0);
         assertEquals(skiResortList[0].getLongitude(), nearestLocation.longitude, 0.0);
