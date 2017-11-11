@@ -16,15 +16,15 @@ public class ComparatorFactory {
         return new DistanceComparator(location);
     }
 
-    public WeatherComparator getWeatherComparator() {
+    public static WeatherComparator getWeatherComparator() {
         return new WeatherComparator();
     }
 
-    public OperatingComparator getOperatingComparator() {
+    public static OperatingComparator getOperatingComparator() {
         return new OperatingComparator();
     }
 
-    public OpenedLiftsComparator getOpenedLiftsComparator() {
+    public static OpenedLiftsComparator getOpenedLiftsComparator() {
         return new OpenedLiftsComparator();
     }
 
@@ -68,7 +68,7 @@ public class ComparatorFactory {
         }
     }
 
-    private class WeatherComparator implements Comparator<SkiResort> {
+    private static class WeatherComparator implements Comparator<SkiResort> {
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
             return Integer.compare(skiResort.getWeatherData().getClouds().getAll(),
@@ -76,7 +76,7 @@ public class ComparatorFactory {
         }
     }
 
-    private class OperatingComparator implements Comparator<SkiResort> {
+    private static class OperatingComparator implements Comparator<SkiResort> {
 
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
@@ -84,7 +84,7 @@ public class ComparatorFactory {
         }
     }
 
-    private class OpenedLiftsComparator implements Comparator<SkiResort> {
+    private static class OpenedLiftsComparator implements Comparator<SkiResort> {
 
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
@@ -93,7 +93,7 @@ public class ComparatorFactory {
         }
     }
 
-    private class OpenedSlopsComparator implements Comparator<SkiResort> {
+    private static class OpenedSlopsComparator implements Comparator<SkiResort> {
 
         @Override
         public int compare(SkiResort skiResort, SkiResort t1) {
