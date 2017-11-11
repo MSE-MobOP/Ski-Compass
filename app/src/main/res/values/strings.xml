@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="detailTemp">%1$d°</string>
+
     <string name="app_name">Ski-Compass</string>
     <string name="noData">No Data</string>
     <string name="detail_image_alt">Illustration of the ski resort</string>
@@ -20,8 +22,12 @@
     <string name="detailStatusOpen">open</string>
     <string name="detailStatusClosed">closed</string>
     <string name="detailStatusUnknown">Unknown</string>
-
-    <string name="detailTemp">%1$d°</string>
+    <string name="mainText">Find ski-resorts around your current location</string>
+    <string name="mainDistanceButton">List by distance</string>
+    <string name="mainOperatingButton">List by operating status</string>
+    <string name="mainWeatherButton">List by weather</string>
+    <string name="mainLiftsButton">List by opened lifts</string>
+    <string name="mainSlopsButton">List by opened slops</string>
 
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">

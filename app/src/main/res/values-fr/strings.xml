@@ -20,6 +20,12 @@
     <string name="detailStatusOpen">ouvert</string>
     <string name="detailStatusClosed">fermé</string>
     <string name="detailStatusUnknown">Inconnu</string>
+    <string name="mainText">Trouvez des stations de ski autour de votre position</string>
+    <string name="mainDistanceButton">Liste par distance</string>
+    <string name="mainOperatingButton">Liste par statut d\'opération</string>
+    <string name="mainWeatherButton">Liste par temps</string>
+    <string name="mainLiftsButton">Liste par ascenseurs ouverts</string>
+    <string name="mainSlopsButton">Liste pour les pistes ouvertes</string>
 
     <!-- Array for spinner in list-activity -->
     <string-array name="spinnerSortItems">
