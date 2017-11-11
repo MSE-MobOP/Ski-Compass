@@ -1,102 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:weightSum="1"
-    android:background="@color/colorBackground">
+    android:weightSum="1">
 
-    <!--add scale-->
-    <ImageView
-        android:id="@+id/detailImageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/detail_image_alt"
-        android:src="@drawable/mountain" />
-
-    <RelativeLayout
-        android:id="@+id/conditionsLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/detailImageView"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:orientation="vertical">
+        <!--add scale-->
 
-        <TextView
-            android:id="@+id/conditionsTextView"
+        <RelativeLayout
+            android:id="@+id/conditionsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:text="@string/detailCurrentConditions" />
+            android:layout_marginTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
 
-        <ImageView
-            android:id="@+id/weatherImageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_below="@id/conditionsTextView"
-            android:layout_alignParentStart="true"
-            app:srcCompat="@drawable/weather_02d" />
+            <TextView
+                android:id="@+id/conditionsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/detailCurrentConditions"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/temperatureTextView"
-            android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:layout_below="@id/conditionsTextView"
-            android:layout_toEndOf="@id/weatherImageView"
-            android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd"
-            android:gravity="bottom|end"
-            android:textSize="56sp"
-            android:textColor="@color/black"
-            android:text="23°"/>
+            <ImageView
+                android:id="@+id/weatherImageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/conditionsTextView"
+                app:srcCompat="@drawable/weather_02d" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/temperatureTextView"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/conditionsTextView"
+                android:layout_toEndOf="@id/weatherImageView"
+                android:gravity="bottom|end"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="56sp"
+                android:text="@string/detailTempPlaceholder"/>
 
-    <ListView
-        android:id="@+id/detailList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/conditionsLayout"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        </RelativeLayout>
 
-    </ListView>
+        <ListView
+            android:id="@+id/detailList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:scrollbars="none">
 
-    <LinearLayout
-        android:id="@+id/buttosLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentBottom="true">
+        </ListView>
 
-        <Button
-            android:id="@+id/detailNavButton"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/buttosLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/detailNavButtonName"
-            android:theme="@style/AppTheme.Button"
-            android:onClick="createMapIntent" />
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/detailWebButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/detailWebButtonName"
-            android:theme="@style/AppTheme.Button"
-            android:onClick="createWebIntent" />
+            <Button
+                android:id="@+id/detailNavButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="createMapIntent"
+                android:text="@string/detailNavButtonName"
+                android:theme="@style/AppTheme.Button" />
+
+            <Button
+                android:id="@+id/detailWebButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="createWebIntent"
+                android:text="@string/detailWebButtonName"
+                android:theme="@style/AppTheme.Button" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
