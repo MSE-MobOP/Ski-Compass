@@ -20,6 +20,9 @@ public class WeatherData implements Serializable {
 
     @SerializedName("clouds")
     private Clouds clouds;
+    
+    @SerializedName("wind")
+    private Wind wind;
 
     public WeatherData() {
     }
@@ -45,4 +48,12 @@ public class WeatherData implements Serializable {
     public void setClouds(Clouds clouds) {
         this.clouds = clouds;
     }
+    
+    public Wind getWind() {
+		return wind;
+	}
+    
+    public void setWind(Wind wind) {
+		this.wind = wind;
+	}
 }

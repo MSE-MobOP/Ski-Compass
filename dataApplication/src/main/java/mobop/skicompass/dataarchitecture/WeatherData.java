@@ -12,23 +12,48 @@ import com.google.gson.annotations.SerializedName;
 
 public class WeatherData implements Serializable {
 
-	@SerializedName("main")
-	private Main main;
-	
-	@SerializedName("weather")
-	private List<Weather> weather;
+    @SerializedName("main")
+    private Main main;
 
-	@SerializedName("clouds")
-	private Clouds clouds;
+    @SerializedName("weather")
+    private List<Weather> weather;
 
-	public Main getMain() {
-		return main;
+    @SerializedName("clouds")
+    private Clouds clouds;
+    
+    @SerializedName("wind")
+    private Wind wind;
+
+    public WeatherData() {
+    }
+
+    public WeatherData(Main main, List<Weather> weather, Clouds clouds) {
+        this.main = main;
+        this.weather = weather;
+        this.clouds = clouds;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public List<Weather> getWeather() {
+        return weather;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(Clouds clouds) {
+        this.clouds = clouds;
+    }
+    
+    public Wind getWind() {
+		return wind;
 	}
-
-	public List<Weather> getWeather() {
-		return weather;
+    
+    public void setWind(Wind wind) {
+		this.wind = wind;
 	}
-
-	public Clouds getClouds(){return clouds;}
-
 }

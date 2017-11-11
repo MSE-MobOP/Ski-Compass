@@ -15,17 +15,28 @@ public class Weather implements Serializable{
     private String icon;
 	
 	@SerializedName("description")
-	private String description;
+    private String description;
 	
 	private String descriptionDE;
 	
 	private String descriptionFR;
 	
 	@SerializedName("main")
-	private String main;
+    private String main;
 	
 	@SerializedName("id")
-	private int id;
+    private int id;
+
+    public Weather(){}
+
+    public Weather(String icon, String description, String descriptionDE, String descriptionFR, String main, int id) {
+        this.icon = icon;
+        this.description = description;
+        this.descriptionDE = descriptionDE;
+        this.descriptionFR = descriptionFR;
+        this.main = main;
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -62,5 +73,8 @@ public class Weather implements Serializable{
     public String getMain() {
         return main;
     }
-    
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }

@@ -12,17 +12,24 @@ import java.io.Serializable;
 public class Wind implements Serializable {
     
 	@SerializedName("deg")
-    private String deg;
+    private double deg;
 	
 	@SerializedName("speed")
-    private String speed;
-    
-    public double getDeg() {
-        return Double.parseDouble(deg);
-    }
-    
-    public double getSpeed() {
-        return Double.parseDouble(speed);
-    }
-    
+    private double speed;
+	
+	public double getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+	
+	public double getDeg() {
+		return deg;
+	}
+	
+	public void setDeg(double deg) {
+		this.deg = deg;
+	}
 }
