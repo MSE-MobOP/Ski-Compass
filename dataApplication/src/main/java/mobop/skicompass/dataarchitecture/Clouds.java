@@ -8,10 +8,19 @@ import java.io.Serializable;
  * Created by Martin on 06.11.2017.
  */
 
-public class Clouds implements Serializable{
+public class Clouds implements Serializable {
 
-    @SerializedName("all")
-    private int all;
+	@SerializedName("all")
+	private int all;
 
-    public int getAll(){return all;}
+	private Clouds() {
+	}
+
+	public Clouds(int all) {
+		this.all = all;
+	}
+
+	public int getAll() {
+		return all;
+	}
 }

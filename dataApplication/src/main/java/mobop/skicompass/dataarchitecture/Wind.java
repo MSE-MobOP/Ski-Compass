@@ -12,7 +12,9 @@ import java.io.Serializable;
 public class Wind implements Serializable {
 
 	@SerializedName("deg")
-	private double deg;	@SerializedName("speed")
+	private double deg;
+
+	@SerializedName("speed")
 	private double speed;
 
 	public Wind() {
@@ -29,4 +31,5 @@ public class Wind implements Serializable {
 
 	public double getDeg() {
 		return deg;
-	}}
+	}
+}
