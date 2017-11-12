@@ -1,6 +1,7 @@
 package mobop.skicompass;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -123,7 +124,9 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
      */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        ((TextView) view).setTextColor(ContextCompat.getColor(this, R.color.white)); //Change selected text color
+        TextView selectedItem = (TextView) view;
+        selectedItem.setTextColor(ContextCompat.getColor(this, R.color.white)); //Change selected text color
+        selectedItem.setTypeface(null, Typeface.BOLD);
         SkiResortManager.getInstance().sortingList(sortPriorityValues[i]);
     }
 

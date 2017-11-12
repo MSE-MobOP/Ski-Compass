@@ -1,6 +1,7 @@
 package mobop.skicompass;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class SkiResortArrayAdapter extends ArrayAdapter<SkiResort> {
 
             if (name != null) {
                 name.setText(resort.getName());
+                name.setTypeface(null, Typeface.NORMAL);
             }
 
             // Set image to Operating Status
