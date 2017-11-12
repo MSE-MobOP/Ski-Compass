@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.firebase.geofire.GeoLocation;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +123,7 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
      */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        ((TextView) view).setTextColor(ContextCompat.getColor(this, R.color.white)); //Change selected text color
         SkiResortManager.getInstance().sortingList(sortPriorityValues[i]);
     }
 
