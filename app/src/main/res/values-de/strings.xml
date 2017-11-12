@@ -21,11 +21,11 @@
     <string name="detailStatusClosed">geschlossen</string>
     <string name="detailStatusUnknown">Unbekannt</string>
     <string name="mainText">Finde Ski-Gebiete in deiner Umgebung</string>
-    <string name="mainDistanceButton">Liste nach Distanz</string>
-    <string name="mainOperatingButton">Liste nach Öffnungs-Status</string>
-    <string name="mainWeatherButton">Liste nach Wetter</string>
-    <string name="mainLiftsButton">Liste nach geöffneten Liften</string>
-    <string name="mainSlopsButton">Liste nach geöffneten Pisten</string>
+    <string name="mainDistanceButton">Sortiert nach Distanz</string>
+    <string name="mainOperatingButton">Sortiert nach Öffnungs-Status</string>
+    <string name="mainWeatherButton">Sortiert nach Wetter</string>
+    <string name="mainLiftsButton">Sortiert nach geöffneten Liften</string>
+    <string name="mainSlopsButton">Sortiert nach geöffneten Pisten</string>
     <string name="detailWind">Windgeschwindigkeit</string>
     <string name="detailOpenLifts">Geöffnete Lifte</string>
     <string name="detailOpenSlopes">Geöffnete Piste</string>
