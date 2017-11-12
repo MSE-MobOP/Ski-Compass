@@ -8,9 +8,7 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.DatabaseReference.CompletionListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.JsonNode;
@@ -22,10 +20,12 @@ import mobop.skicompass.dataarchitecture.Weather;
 import mobop.skicompass.dataarchitecture.WeatherData;
 
 public class DatabaseFill {
+	
+	private static final String SKIMAP_URL =  "https://skimap.org/SkiAreas/view/%d.json";
 
 	private static Random random = new Random();
 	private static int[] resortsIDs = {
-			// 383 Graubï¿½nden
+			// 383 Graubünden
 			1012, 1017, 4398, /* 4396, */ 4395, 1018, 3801, 1009, 1014, 1016, 1011, 4397, 3712, 3728, 4981, 5029, 4050,
 			1010, 3722, 3721, 3799, 1015, 2405, 630, 3800, 4048, 1019,
 			// 385 Berner Oberland
@@ -45,9 +45,9 @@ public class DatabaseFill {
 	public static void main(String[] args) throws Exception {
 		// Initialize Firebase Database Connection
 		File dir = new File(".");
-		File admin_sdk_key_file = dir.listFiles(
+		File adminSdkKeyFile = dir.listFiles(
 				(directory, name) -> name.startsWith("ski-compass-firebase-adminsdk") && name.endsWith(".json"))[0];
-		FileInputStream serviceAccount = new FileInputStream(admin_sdk_key_file.getAbsolutePath());
+		FileInputStream serviceAccount = new FileInputStream(adminSdkKeyFile.getAbsolutePath());
 		FirebaseOptions options = new FirebaseOptions.Builder().setServiceAccount(serviceAccount)
 				.setDatabaseUrl("https://ski-compass.firebaseio.com").build();
 		FirebaseApp.initializeApp(options);
@@ -63,7 +63,7 @@ public class DatabaseFill {
 
 			// Get Data form API: Resorts
 			System.out.println("Get Resort: " + id);
-			JsonNode jsonResponse = Unirest.get("https://skimap.org/SkiAreas/view/" + id + ".json").asJson().getBody();
+			JsonNode jsonResponse = Unirest.get(String.format(SKIMAP_URL, id)).asJson().getBody();
 
 			// Read out Location from API Response
 			double latitude = jsonResponse.getObject().getDouble("latitude");
@@ -75,14 +75,11 @@ public class DatabaseFill {
 			SkiResort skiResort = gson.fromJson(jsonResponse.toString(), SkiResort.class);
 
 			// get weather data
-			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
-					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=en").asJson().getBody();
+			jsonResponse = Unirest.get(getWeatherRequestURL(latitude, longitude, "en")).asJson().getBody();
 			WeatherData weather = gson.fromJson(jsonResponse.toString(), WeatherData.class);
-			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
-					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=fr").asJson().getBody();
+			jsonResponse = Unirest.get(getWeatherRequestURL(latitude, longitude, "fr")).asJson().getBody();
 			WeatherData frenchWeather = gson.fromJson(jsonResponse.toString(), WeatherData.class);
-			jsonResponse = Unirest.get("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon="
-					+ longitude + "&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=de").asJson().getBody();
+			jsonResponse = Unirest.get(getWeatherRequestURL(latitude, longitude, "de")).asJson().getBody();
 			WeatherData germanWeather = gson.fromJson(jsonResponse.toString(), WeatherData.class);
 			
 			Weather w = weather.getWeather().get(0);
@@ -113,10 +110,14 @@ public class DatabaseFill {
 			break;
 		case 2:
 			skiResort.setOperatingStatus(OperatingStatus.Unknown);
+			break;
+		default:
+			skiResort.setOperatingStatus(OperatingStatus.Unknown);
+
 		}
 
 		skiResort.setTotalLifts(random.nextInt(20));
-		skiResort.setTotalSlops(Math.round(random.nextDouble() * 1500) / 10);
+		skiResort.setTotalSlops(Math.round(random.nextDouble() * 200) / 10);
 
 		if (skiResort.getOperatingStatus() == OperatingStatus.Operating) {
 			skiResort.setOpenedLifts((int) (skiResort.getTotalLifts() * random.nextDouble()));
@@ -131,5 +132,11 @@ public class DatabaseFill {
 		if (skiResort.getOpenedSlops() > skiResort.getTotalSlops()) {
 			throw new RuntimeException("More opened slopes then total slopes!!!");
 		}
+	}
+	
+	private static String getWeatherRequestURL(double latitude, double longitude, String lang) {
+		return "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude	+
+				"&lon="	+ longitude +
+				"&APPID=ae4954f6aa99cd585f31703b2247b4e6&lang=" + lang;
 	}
 }
