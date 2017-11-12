@@ -130,6 +130,7 @@ public class DatabaseFill {
 		}
 
 		if (skiResort.getOpenedSlops() > skiResort.getTotalSlops()) {
+			throw new Exception("asdfasdf");
 			throw new RuntimeException("More opened slopes then total slopes!!!");
 		}
 	}
