@@ -25,6 +25,7 @@ public class WeatherData implements Serializable {
     private Wind wind;
 
     public WeatherData() {
+        // Needed for GSon and FireBase
     }
 
     public WeatherData(Main main, List<Weather> weather, Clouds clouds, Wind wind) {

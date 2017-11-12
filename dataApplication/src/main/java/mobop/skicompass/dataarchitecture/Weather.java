@@ -27,7 +27,9 @@ public class Weather implements Serializable{
 	@SerializedName("id")
     private int id;
 
-    public Weather(){}
+    public Weather(){
+        // Needed for GSon and FireBase
+    }
 
     public Weather(String icon, String description, String descriptionDE, String descriptionFR, String main, int id) {
         this.icon = icon;

@@ -26,7 +26,9 @@ public class Main implements Serializable{
 	@SerializedName("humidity")
 	private int humidity; 
 	
-    public Main(){};
+    public Main(){
+		// Needed for GSon and FireBase
+	};
     
     public Main(double temp, double tempMin, double tempMax, double pressure, int humidity) {
 		this.temp = temp;

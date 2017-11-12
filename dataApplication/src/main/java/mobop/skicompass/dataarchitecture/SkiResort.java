@@ -41,8 +41,11 @@ public class SkiResort implements Serializable {
 	@SerializedName("latitude")
 	private double latitude;
 
-	public SkiResort(){};
+	public SkiResort(){
+		// Needed for GSon and FireBase
+	};
 
+	@java.lang.SuppressWarnings("squid:S00107") // This constructor is used for testing, it avoids to generate 12 setters
 	public SkiResort(int id, String name, OperatingStatus operatingStatus, String nightSkiing, int totalLifts, int openedLifts, double totalSlops, double openedSlops, String officialWebsite, WeatherData weatherData, double longitude, double latitude) {
 		this.id = id;
 		this.name = name;

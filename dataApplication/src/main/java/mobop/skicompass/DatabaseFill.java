@@ -20,6 +20,8 @@ import mobop.skicompass.dataarchitecture.Weather;
 import mobop.skicompass.dataarchitecture.WeatherData;
 
 public class DatabaseFill {
+    
+    private DatabaseFill() {}
 	
 	private static final String SKIMAP_URL =  "https://skimap.org/SkiAreas/view/%d.json";
 

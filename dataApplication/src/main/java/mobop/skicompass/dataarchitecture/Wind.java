@@ -18,6 +18,7 @@ public class Wind implements Serializable {
 	private double speed;
 
 	public Wind() {
+		// Needed for GSon and FireBase
 	}
 
 	public Wind(double deg, double speed) {
