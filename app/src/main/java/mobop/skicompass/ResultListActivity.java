@@ -125,6 +125,9 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         TextView selectedItem = (TextView) view;
+        if (selectedItem == null) {
+            return;
+        }
         selectedItem.setTextColor(ContextCompat.getColor(this, R.color.white)); //Change selected text color
         selectedItem.setTypeface(null, Typeface.BOLD);
         SkiResortManager.getInstance().sortingList(sortPriorityValues[i]);
