@@ -185,9 +185,10 @@ public class DetailActivity extends AppCompatActivity {
      * Checks if chosen resort has a website. If not, the web button is disabled
      */
     private void checkWebButton() {
-        if (selectedResort.getOfficialWebsite() == null) {
+        if (selectedResort.getOfficialWebsite() == null || selectedResort.getOfficialWebsite().isEmpty()) {
             Button webButton = (Button) findViewById(R.id.detailWebButton);
             webButton.setEnabled(false);
+            webButton.setAlpha(0.5F);
         }
     }
 
